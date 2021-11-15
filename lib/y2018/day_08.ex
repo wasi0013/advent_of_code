@@ -4,7 +4,9 @@ defmodule Aoc.Y2018.Day08 do
   """
   import Aoc.Helper.IO
 
+  @spec run_part1 :: no_return
   def run_part1, do: get_integer_input("2018", "08") |> solve_part1()
+  @spec run_part2 :: no_return
   def run_part2, do: get_integer_input("2018", "08") |> solve_part2()
 
   def solve_part1([child, meta | data]), do: calculate(data, child, meta, 0)
