@@ -1,6 +1,6 @@
 defmodule Aoc.Y2019.Day01 do
   @moduledoc """
-  Solved https://adventofcode.com/2018/day/8
+  Solved https://adventofcode.com/2019/day/1
   """
   import Aoc.Helper.IO
 
