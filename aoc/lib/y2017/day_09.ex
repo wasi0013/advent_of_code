@@ -1,5 +1,7 @@
 defmodule Aoc.Y2017.Day09 do
-  @moduledoc false
+  @moduledoc """
+  Solved https://adventofcode.com/2017/day/9
+  """
   import Aoc.Helper.IO
 
   def run_part1, do: get_string_input("2017", "09") |> solve_part1()
