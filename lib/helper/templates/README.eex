@@ -1,0 +1,26 @@
+# <img src="https://adventofcode.com/favicon.png" width=24 alt=":star:"> Advent of Code
+
+All of my Advent of Code solutions written in Elixir.
+
+## Test
+
+run `mix test`
+
+## Solved so far
+
+<table>
+  <tr>
+    <th>Year</th>
+    <th>Day</th>
+    <th>Status</th>
+  </tr>
+  <%= for [year, day] <- list do %>
+  <tr>
+   <td><a href="https://adventofcode.com/<%= year %>/day/<%= day %>"><%= year %></a></td>
+   <td><a href='https://github.com/wasi0013/advent_of_code/blob/main/lib/y<%= year %>/day_<%= String.pad_leading(Integer.to_string(day), 2, ["0"])%>.ex'> <%= day %></a></td>
+   <td> :star: :star: </td>
+   </tr>
+<% end %>
+  </tr>
+
+</table>
