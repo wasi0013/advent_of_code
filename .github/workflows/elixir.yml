@@ -36,4 +36,4 @@ jobs:
       with:
         file_pattern: README.md
         commit_message: ":octocat: updated README.md automagically"
-        commit_username: "OctoBot"
+        commit_user_name: "EEXoBot"
