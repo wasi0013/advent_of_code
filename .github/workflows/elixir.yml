@@ -29,3 +29,11 @@ jobs:
       run: mix deps.get
     - name: Run tests
       run: mix test
+    - name: Update Readme
+      run: mix update_readme
+
+    - uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        file_pattern: README.md
+        commit_message: ":octocat: updated README.md automagically"
+        commit_username: "OctoBot"
