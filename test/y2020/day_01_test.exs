@@ -11,6 +11,6 @@ defmodule AocTest.Y2020.Day01Test do
   end
 
   test "Part 2 is solved" do
-    assert Aoc.Y2020.Day02.run_part2() == 212_481_360
+    assert Aoc.Y2020.Day01.run_part2() == 212_481_360
   end
 end
