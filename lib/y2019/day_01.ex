@@ -5,9 +5,21 @@ defmodule Aoc.Y2019.Day01 do
   import Aoc.Helper.IO
 
   @spec run_part1 :: no_return
-  def run_part1(), do: get_string_input("2019", "01") |> String.split("\n") |> Enum.map(&String.to_integer/1) |> solve_part1()
+  def run_part1(),
+    do:
+      get_string_input("2019", "01")
+      |> String.split("\n")
+      |> Enum.map(&String.to_integer/1)
+      |> solve_part1()
+
   @spec run_part2 :: no_return
-  def run_part2(), do: get_string_input("2019", "01") |> String.split("\n") |> Enum.map(&String.to_integer/1) |> solve_part2()
+  def run_part2(),
+    do:
+      get_string_input("2019", "01")
+      |> String.split("\n")
+      |> Enum.map(&String.to_integer/1)
+      |> solve_part2()
+
   def solve_part1(data) do
     data
     |> Enum.map(&get_fuel_req/1)
@@ -36,5 +48,4 @@ defmodule Aoc.Y2019.Day01 do
     value = get_fuel_req(mass)
     if value > 0, do: value + get_added_fuel(value), else: 0
   end
-
 end

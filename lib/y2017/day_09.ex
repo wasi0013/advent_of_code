@@ -24,5 +24,4 @@ defmodule Aoc.Y2017.Day09 do
 
   def count_garbage(data),
     do: Enum.map(data, fn [h | _t] -> String.length(h) - 2 end) |> Enum.sum()
-
 end

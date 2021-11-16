@@ -26,8 +26,16 @@ defmodule Aoc.Y2018.Day08 do
   def value([h | data], 0, meta, sum, cache, false),
     do: value(data, 0, meta - 1, sum + h, cache, false)
 
-  def value([h | data], 0, meta, sum, cache, true), do:
-      value(data, 0, meta - 1, sum + Map.get(cache, length(Map.values(cache)) - h + 1, 0), cache, true)
+  def value([h | data], 0, meta, sum, cache, true),
+    do:
+      value(
+        data,
+        0,
+        meta - 1,
+        sum + Map.get(cache, length(Map.values(cache)) - h + 1, 0),
+        cache,
+        true
+      )
 
   def value([child, meta | data], pchild, pmeta, _sum, cache, true) do
     {data, sum} = value(data, child, meta, 0, %{}, child > 0)
