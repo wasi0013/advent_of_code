@@ -1,4 +1,5 @@
 # <img src="https://adventofcode.com/favicon.png" width=24 alt=":star:"> Advent of Code
+[![Elixir CI](https://github.com/wasi0013/advent_of_code/actions/workflows/elixir.yml/badge.svg?branch=main)](https://github.com/wasi0013/advent_of_code/actions/workflows/elixir.yml)
 
 All of my Advent of Code solutions written in Elixir.
 
