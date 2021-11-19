@@ -46,6 +46,12 @@ run `mix test`
    <td> :star: :star: </td>
    </tr>
 
+  <tr>
+   <td><a href="https://adventofcode.com/2020/day/2">2020</a></td>
+   <td><a href='https://github.com/wasi0013/advent_of_code/blob/main/lib/y2020/day_02.ex'> 2</a></td>
+   <td> :star: :star: </td>
+   </tr>
+
   </tr>
 
 </table>
