@@ -1,5 +1,7 @@
 defmodule Aoc.Y2020.Day03 do
-  @moduledoc false
+  @moduledoc """
+  Solved https://adventofcode.com/2020/day/3
+  """
   @slopes [[1, 1], [3, 1], [5, 1], [7, 1], [1, 2]]
   @tree "#"
 
@@ -24,21 +26,16 @@ defmodule Aoc.Y2020.Day03 do
   defp traverse([row1 | forest], position, right, 1, result) when forest != [] do
     row2 = hd(forest)
     position = rem(position + right, length(row1))
-    if Enum.at(row2, rem(position, length(row2)))  == @tree do
-          traverse(forest, position, right, 1, result + 1)
-      else
-          traverse(forest, position, right, 1, result)
-      end
+    traverse(forest, position, right, 1, result + found_tree?(row2, position))
   end
+
   defp traverse([row1, _ | forest], position, 1, 2, result) when forest != [] do
     row2 = hd(forest)
     position = rem(position + 1, length(row1))
-    if Enum.at(row2, rem(position, length(row2)))  == @tree do
-          traverse(forest, position, 1, 2, result + 1)
-      else
-          traverse(forest, position, 1, 2, result)
-      end
+    traverse(forest, position, 1, 2, result + found_tree?(row2, position))
   end
+  @spec found_tree?(list, integer) :: integer
+  defp found_tree?(row, position), do:  if Enum.at(row, rem(position, length(row)))  == @tree, do: 1, else: 0
 
   @spec get_input :: no_return
   defp get_input(), do:   get_string_input("2020", "03") |> String.split("\n") |> Enum.map(&String.graphemes/1)
