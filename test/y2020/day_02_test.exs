@@ -6,6 +6,7 @@ defmodule AocTest.Y2020.Day02Test do
   test "Part 1 Example: " do
     assert Aoc.Y2020.Day02.solve_part1(@sample) == 2
   end
+
   test "Part2 Example: " do
     assert Aoc.Y2020.Day02.solve_part2(@sample) == 1
   end

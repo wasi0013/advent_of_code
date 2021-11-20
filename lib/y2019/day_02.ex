@@ -3,6 +3,7 @@ defmodule Aoc.Y2019.Day02 do
   Solved https://adventofcode.com/2019/day/2
   """
   import Aoc.Helper.IO
+
   @spec run_part1 :: no_return
   def run_part1 do
     get_input()
@@ -23,26 +24,8 @@ defmodule Aoc.Y2019.Day02 do
     |> get_result()
   end
 
-  def get_result([{noun, verb}]) do
-    100 * noun + verb
-  end
-
-  @spec get_input :: no_return
-  def get_input() do
-    get_string_input("2019", "02")
-    |> String.trim()
-    |> String.split(",")
-    |> Enum.map(&String.to_integer/1)
-  end
-
-  @spec set_initial_data(list, integer, integer) :: list
-  def set_initial_data(list, op1 \\ 12, op2 \\ 2) do
-    [opcode | [_ | [_ | list]]] = list
-    [opcode | [op1 | [op2 | list]]]
-  end
-
   @spec solve_part1(list, integer) :: integer
-  def solve_part1(list, cursor \\ 0) do
+  def solve_part1(list, cursor \\ 0) when list != [] do
     case Enum.at(list, cursor) do
       1 -> list |> add(cursor + 1, cursor + 2, cursor + 3) |> solve_part1(cursor + 4)
       2 -> list |> multiply(cursor + 1, cursor + 2, cursor + 3) |> solve_part1(cursor + 4)
@@ -51,15 +34,32 @@ defmodule Aoc.Y2019.Day02 do
     end
   end
 
+  def set_initial_data(list, op1 \\ 12, op2 \\ 2) do
+    [opcode | [_ | [_ | list]]] = list
+    [opcode | [op1 | [op2 | list]]]
+  end
+
   @spec add(list, integer, integer, integer) :: list
-  def add(list, op1, op2, res) do
+  defp add(list, op1, op2, res) do
     value = Enum.at(list, Enum.at(list, op1)) + Enum.at(list, Enum.at(list, op2))
     List.replace_at(list, Enum.at(list, res), value)
   end
 
   @spec multiply(list, integer, integer, integer) :: list
-  def multiply(list, op1, op2, res) do
-  value = Enum.at(list, Enum.at(list, op1)) * Enum.at(list, Enum.at(list, op2))
-  List.replace_at(list, Enum.at(list, res), value)
+  defp multiply(list, op1, op2, res) do
+    value = Enum.at(list, Enum.at(list, op1)) * Enum.at(list, Enum.at(list, op2))
+    List.replace_at(list, Enum.at(list, res), value)
+  end
+
+  def get_result([{noun, verb}]) do
+    100 * noun + verb
+  end
+
+  @spec get_input :: no_return
+  defp get_input() do
+    get_string_input("2019", "02")
+    |> String.trim()
+    |> String.split(",")
+    |> Enum.map(&String.to_integer/1)
   end
 end
