@@ -30,39 +30,17 @@ defmodule Aoc.Y2020.Day04 do
   defp check_validity?(["hcl", value]), do: Regex.match?(~r/^#[a-f\d]{6}$/, value)
   defp check_validity?(["ecl", value]), do: Regex.match?(~r/^(amb|blu|brn|gry|grn|hzl|oth)$/, value)
   defp check_validity?(["pid", value]), do: Regex.match?(~r/^\d{9}$/, value)
+  defp check_validity?(["byr", value]), do: Regex.match?(~r/^\d{4}$/, value) and String.to_integer(value) in 1920..2002
+  defp check_validity?(["eyr", value]), do: Regex.match?(~r/^\d{4}$/, value) and String.to_integer(value) in 2020..2030
+  defp check_validity?(["iyr", value]), do: Regex.match?(~r/^\d{4}$/, value) and String.to_integer(value) in 2010..2020
 
   defp check_validity?(["hgt", value]) do
     if Regex.match?(~r/^(\d+?)(in|cm?)$/, value) do
       case Regex.run(~r/^(\d+?)(in|cm?)$/, value) |> Enum.take(-2) do
-        [num, "in"] ->
-          num = Integer.parse(num) |> elem(0)
-          59 <= num and 76 >= num
-
-        [num, "cm"] ->
-          num = Integer.parse(num) |> elem(0)
-          150 <= num and 193 >= num
-
-        _ ->
-          false
+        [num, "in"] -> String.to_integer(num) in 59..76
+        [num, "cm"] -> String.to_integer(num) in 150..193
+        _ -> false
       end
-    end
-  end
-
-  defp check_validity?(["byr", value]) do
-    if Regex.match?(~r/^\d{4}$/, value) do
-      String.to_integer(value) >= 1920 and String.to_integer(value) <= 2002
-    end
-  end
-
-  defp check_validity?(["iyr", value]) do
-    if Regex.match?(~r/^\d{4}$/, value) do
-      String.to_integer(value) >= 2010 and String.to_integer(value) <= 2020
-    end
-  end
-
-  defp check_validity?(["eyr", value]) do
-    if Regex.match?(~r/^\d{4}$/, value) do
-      String.to_integer(value) >= 2020 and String.to_integer(value) <= 2030
     end
   end
 
