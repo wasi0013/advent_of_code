@@ -4,6 +4,7 @@ defmodule Aoc.Y2020.Day04 do
   """
   import Aoc.Helper.IO
   @fields ~w[byr iyr eyr hgt hcl ecl pid]
+  @range %{"in" => 59..76, "cm" => 150..193, "byr" => 1920..2002, "eyr" => 2020..2030, "iyr" => 2010..2020}
 
   @spec run_part1 :: no_return
   def run_part1(), do: get_input() |> solve_part1()
@@ -30,17 +31,20 @@ defmodule Aoc.Y2020.Day04 do
   defp check_validity?(["hcl", value]), do: Regex.match?(~r/^#[a-f\d]{6}$/, value)
   defp check_validity?(["ecl", value]), do: Regex.match?(~r/^(amb|blu|brn|gry|grn|hzl|oth)$/, value)
   defp check_validity?(["pid", value]), do: Regex.match?(~r/^\d{9}$/, value)
-  defp check_validity?(["byr", value]), do: Regex.match?(~r/^\d{4}$/, value) and String.to_integer(value) in 1920..2002
-  defp check_validity?(["eyr", value]), do: Regex.match?(~r/^\d{4}$/, value) and String.to_integer(value) in 2020..2030
-  defp check_validity?(["iyr", value]), do: Regex.match?(~r/^\d{4}$/, value) and String.to_integer(value) in 2010..2020
+
+  defp check_validity?(["byr", value]),
+    do: Regex.match?(~r/^\d{4}$/, value) and String.to_integer(value) in @range["byr"]
+
+  defp check_validity?(["eyr", value]),
+    do: Regex.match?(~r/^\d{4}$/, value) and String.to_integer(value) in @range["eyr"]
+
+  defp check_validity?(["iyr", value]),
+    do: Regex.match?(~r/^\d{4}$/, value) and String.to_integer(value) in @range["iyr"]
 
   defp check_validity?(["hgt", value]) do
     if Regex.match?(~r/^(\d+?)(in|cm?)$/, value) do
-      case Regex.run(~r/^(\d+?)(in|cm?)$/, value) |> Enum.take(-2) do
-        [num, "in"] -> String.to_integer(num) in 59..76
-        [num, "cm"] -> String.to_integer(num) in 150..193
-        _ -> false
-      end
+      case Regex.run(~r/^(\d+?)(in|cm?)$/, value) |> Enum.take(-2),
+        do: ([num, unit] -> String.to_integer(num) in @range[unit])
     end
   end
 
