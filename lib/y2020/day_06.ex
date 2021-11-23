@@ -21,18 +21,11 @@ defmodule Aoc.Y2020.Day06 do
   def solve_part2(data) do
     data
     |> Enum.map(fn item -> {Enum.count(String.split(item, "\n")), String.split(item, "\n")} end)
-    |> Enum.map(fn {count, strings} ->
-      {count, List.flatten(Enum.map(strings, fn string -> Enum.to_list(MapSet.new(String.graphemes(string))) end))}
-    end)
-    |> Enum.map(fn {c, items} ->
-      length(Enum.to_list(MapSet.new(Enum.filter(items, fn char -> Enum.count(items, &(&1 == char)) == c end))))
-    end)
+    |> Enum.map(fn {n, strs} -> {n, List.flatten(Enum.map(strs, fn str -> Enum.uniq(String.graphemes(str)) end))} end)
+    |> Enum.map(fn {n, arr} -> length(Enum.uniq(Enum.filter(arr, fn c -> Enum.count(arr, &(&1 == c)) == n end))) end)
     |> Enum.sum()
   end
 
   @spec get_input() :: no_return
-  defp get_input() do
-    get_string_input("2020", "06")
-    |> String.split("\n\n")
-  end
+  defp get_input(), do: get_string_input("2020", "06") |> String.split("\n\n")
 end
