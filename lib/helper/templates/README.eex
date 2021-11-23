@@ -3,6 +3,14 @@
 
 All of my Advent of Code solutions written in Elixir.
 
+## Generate Codes
+
+The following mix task generates boilerplates for new solve. 
+
+    mix code_new -y <year> -d <day(1-25)>
+
+Check this [repository](https://github.com/code-shoily/advent_of_code) for better implementation of a similar mix task (Contains Clean Code + Input Download feature)
+
 ## Test
 
 run `mix test`
