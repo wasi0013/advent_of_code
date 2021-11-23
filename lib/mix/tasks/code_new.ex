@@ -47,6 +47,9 @@ defmodule Mix.Tasks.CodeNew do
 
   defp create_file(path, content) do
     unless File.exists?(path) do
+      with :ok <- File.mkdir_p(Path.dirname(path)) do
+        File.write(path, content)
+      end
       File.write(path, content)
     end
   end
