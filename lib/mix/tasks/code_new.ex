@@ -9,8 +9,8 @@ defmodule Mix.Tasks.CodeNew do
   @shortdoc "Generates boilerplate for a problem #{@usage}"
   def run(args) do
     case parse(args) do
-      %{y: y, d: d} -> code_gen(y, d) |> Mix.shell().info()
-      {y, d} -> code_gen(y, d) |> Mix.shell().info()
+      %{y: y, d: d} -> code_gen(y, d)
+      {y, d} -> code_gen(y, d)
       _ -> Mix.shell().error("[Usage]: #{@usage}")
     end
   end
@@ -25,11 +25,11 @@ defmodule Mix.Tasks.CodeNew do
 
   defp code_gen(year, day) when year >= 2015 and day in 1..25 do
     day_string = String.pad_leading(Integer.to_string(day), 2, "0")
-
+    Mix.shell().info([:green, "Generating new files:", :reset])
     code_file = "lib/y#{year}/day_#{day_string}.ex"
     code_content = EEx.eval_file(@code_template, year: year, day: day)
 
-    test_file = "test/y#{year}/day_#{day_string}_test.ex"
+    test_file = "test/y#{year}/day_#{day_string}_test.exs"
     test_content = EEx.eval_file(@test_template, year: year, day: day)
 
     input_file = "#{@input_folder}/#{year}/day#{day_string}.txt"
@@ -37,20 +37,21 @@ defmodule Mix.Tasks.CodeNew do
     create_file(code_file, code_content)
     create_file(test_file, test_content)
     create_file(input_file, "")
-
-    "Generated 3 new files (if not already exists):\n  #{code_file}\n  #{test_file}\n  #{input_file}"
+    Mix.shell().info([:green, "Done.", :reset])
   end
 
   defp code_gen(_, _) do
-    "Invalid Argument: [Usage] #{@usage}"
+    Mix.shell().error("Invalid Argument. [See Usage] #{@usage}")
   end
 
   defp create_file(path, content) do
-    unless File.exists?(path) do
+    if File.exists?(path) do
+      Mix.shell().info([:yellow, "* Skipping: ", :reset, "#{path} ", :yellow, "already exists.", :reset])
+    else
       with :ok <- File.mkdir_p(Path.dirname(path)) do
         File.write(path, content)
+        Mix.shell().info([:green, "* Created new file: ", :reset, "#{path}"])
       end
-      File.write(path, content)
     end
   end
 end
