@@ -3,7 +3,7 @@
 
 All of my Advent of Code solutions written in Elixir.
 
-## Generate Codes
+## Generate New Solve
 
 The following mix task generates boilerplates for new solve. 
 
