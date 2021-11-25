@@ -10,11 +10,11 @@ defmodule Aoc.Y2020.Day07 do
   @spec run_part2 :: no_return
   def run_part2(), do: get_input() |> solve_part2()
 
-  def solve_part1(data) do
-        data
+  def solve_part1(_data) do
+        :unsolved
   end
-  def solve_part2(data) do
-    data
+  def solve_part2(_data) do
+    :unsolved
   end
 
   @spec get_input :: no_return

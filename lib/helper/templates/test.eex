@@ -4,17 +4,17 @@ defmodule AocTest.Y<%= year %>.Day<%= String.pad_leading(Integer.to_string(day),
   import Aoc.Y<%= year %>.Day<%= String.pad_leading(Integer.to_string(day), 2, "0") %>
   @example []
   test "Part 1 Example" do
-    assert solve_part1(@example) == nil
+    assert solve_part1(@example) == :unsolved
   end
   test "Part 2 Example" do
-    assert solve_part2(@example) == nil
+    assert solve_part2(@example) == :unsolved
   end
   
   test "Part 1 is solved" do
-    assert run_part1() == nil
+    assert run_part1() == :unsolved
   end
 
   test "Part 2 is solved" do
-    assert run_part2() == nil
+    assert run_part2() == :unsolved
   end
 end
