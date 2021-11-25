@@ -13,12 +13,13 @@ defmodule Mix.Tasks.UpdateReadme do
     |> elem(1)
     |> Enum.filter(&(&1 |> Module.split() |> Enum.at(-1) |> String.starts_with?("Day")))
     |> Enum.map(
-      &(&1
-        |> Module.split()
-        |> Enum.take(-2)
-        |> Enum.map(fn item ->
-          Integer.parse(String.replace(item, ["Y", "Day"], "")) |> elem(0)
-        end))
+      &{&1.solved_status(),
+       &1
+       |> Module.split()
+       |> Enum.take(-2)
+       |> Enum.map(fn item ->
+         Integer.parse(String.replace(item, ["Y", "Day"], "")) |> elem(0)
+       end)}
     )
   end
 end

@@ -48,4 +48,7 @@ defmodule Aoc.Y2019.Day01 do
     value = get_fuel_req(mass)
     if value > 0, do: value + get_added_fuel(value), else: 0
   end
+
+  @spec solved_status :: atom()
+  def solved_status(), do: :solved
 end

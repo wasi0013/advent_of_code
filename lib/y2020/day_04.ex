@@ -54,4 +54,7 @@ defmodule Aoc.Y2020.Day04 do
     |> String.split("\n\n")
     |> Enum.map(&String.split(&1, [" ", "\n"]))
   end
+
+  @spec solved_status :: atom()
+  def solved_status(), do: :solved
 end

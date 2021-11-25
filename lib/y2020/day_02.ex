@@ -35,4 +35,7 @@ defmodule Aoc.Y2020.Day02 do
     |> String.split("\n")
     |> Enum.map(fn line -> Regex.run(~r/^(.*)-(.*) (.*): (.*)$/, line) |> Enum.take(-4) end)
   end
+
+  @spec solved_status :: atom()
+  def solved_status(), do: :solved
 end

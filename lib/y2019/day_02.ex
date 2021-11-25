@@ -62,4 +62,7 @@ defmodule Aoc.Y2019.Day02 do
     |> String.split(",")
     |> Enum.map(&String.to_integer/1)
   end
+
+  @spec solved_status :: atom()
+  def solved_status(), do: :solved
 end

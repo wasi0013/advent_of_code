@@ -41,4 +41,7 @@ defmodule Aoc.Y2018.Day08 do
     {data, sum} = value(data, child, meta, 0, %{}, child > 0)
     value(data, pchild - 1, pmeta, 0, Map.put(cache, pchild, sum), true)
   end
+
+  @spec solved_status :: atom()
+  def solved_status(), do: :solved
 end

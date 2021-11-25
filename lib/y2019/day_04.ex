@@ -49,4 +49,7 @@ defmodule Aoc.Y2019.Day04 do
       end)
     )
   end
+
+  @spec solved_status :: atom()
+  def solved_status(), do: :solved
 end

@@ -33,4 +33,7 @@ defmodule Aoc.Y2020.Day01 do
 
     head
   end
+
+  @spec solved_status :: atom()
+  def solved_status(), do: :solved
 end

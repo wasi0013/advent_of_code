@@ -28,4 +28,7 @@ defmodule Aoc.Y2020.Day06 do
 
   @spec get_input() :: no_return
   defp get_input(), do: get_string_input("2020", "06") |> String.split("\n\n")
+
+  @spec solved_status :: atom()
+  def solved_status(), do: :solved
 end
