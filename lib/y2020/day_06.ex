@@ -22,7 +22,7 @@ defmodule Aoc.Y2020.Day06 do
     data
     |> Enum.map(fn item -> {Enum.count(String.split(item, "\n")), String.split(item, "\n")} end)
     |> Enum.map(fn {n, strs} -> {n, List.flatten(Enum.map(strs, fn str -> Enum.uniq(String.graphemes(str)) end))} end)
-    |> Enum.map(fn {n, arr} -> length(Enum.uniq(Enum.filter(arr, fn c -> Enum.count(arr, &(&1 == c)) == n end))) end)
+    |> Enum.map(fn {n, arr} -> length(Enum.filter(Enum.uniq(arr), fn c -> Enum.count(arr, &(&1 == c)) == n end)) end)
     |> Enum.sum()
   end
 
