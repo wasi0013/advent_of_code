@@ -128,8 +128,8 @@ run `mix test`
    <td><a href="https://adventofcode.com/2020/day/7">2020</a></td>
    <td><a href='https://github.com/wasi0013/advent_of_code/blob/master/lib/y2020/day_07.ex'> 7</a></td>
    
-   <td> :white_circle: :white_circle: </td>
    
+   <td> :green_circle: :red_circle: </td>
    
    </tr>
 
