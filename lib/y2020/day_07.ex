@@ -25,6 +25,7 @@ defmodule Aoc.Y2020.Day07 do
 
   def process_bags([{key, bags} | rest], cache, reset) do
     cache = update_cache(key, bags, rest, cache, reset)
+
     if Enum.any?(cache, fn {_key, value} -> value == nil end),
       do: process_bags(reset, cache, reset),
       else: cache
