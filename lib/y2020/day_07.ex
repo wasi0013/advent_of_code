@@ -10,9 +10,45 @@ defmodule Aoc.Y2020.Day07 do
   @spec run_part2 :: no_return
   def run_part2(), do: get_input() |> solve_part2()
 
-  def solve_part1(_data) do
-        :unsolved
+  def solve_part1(data) do
+    cache = Map.new(Enum.map(data, fn {key, _bags} -> {key, nil} end))
+    cache = Map.update(cache, "shiny gold", true, fn _ -> true end)
+    cache = Map.update(cache, "other", false, fn _ -> false end)
+
+    process_bags(data, cache, 0, data)
+    |> elem(0)
+    |> Enum.count(fn {_key, value} -> value == true end)
+    |> then(fn v -> v - 1 end)
   end
+
+  def process_bags([], cache, count, _reset), do: {cache, count}
+  def process_bags([{"shiny gold", _bags} | rest], cache, count, reset), do: process_bags(rest, cache, count, reset)
+
+  def process_bags([{key, bags} | rest], cache, count, reset) do
+    {cache, count} =
+      if cache[key] != nil do
+        process_bags(rest, cache, count + if(cache[key] == true, do: 1, else: 0), reset)
+      else
+        if is_ready?(bags, cache) do
+          value = check_bags?(bags, cache)
+          cache = Map.update!(cache, key, fn _ -> value end)
+          process_bags(rest, cache, count + if(cache[key] == true, do: 1, else: 0), reset)
+        else
+          if is_empty?(bags, cache),
+            do: process_bags(rest, Map.update!(cache, key, fn _ -> false end), count, reset),
+            else: process_bags(rest, cache, count, reset)
+        end
+      end
+
+    if Enum.any?(cache, fn {_key, value} -> value == nil end),
+      do: process_bags(reset, cache, count, reset),
+      else: {cache, count}
+  end
+
+  def check_bags?(bags, cache), do: Enum.any?(bags, fn [_n, bag] -> cache[bag] == true or bag == "shiny gold" end)
+  def is_ready?(bags, cache), do: not Enum.any?(bags, fn [_n, bag] -> cache[bag] == nil and bag != "shiny gold" end)
+  def is_empty?(bags, cache), do: Enum.all?(bags, fn [_n, bag] -> cache[bag] == false or bag == "other" end)
+
   def solve_part2(_data) do
     :unsolved
   end
@@ -30,9 +66,9 @@ defmodule Aoc.Y2020.Day07 do
   @spec clean_bags(any) :: [binary]
   defp clean_bags(bags), do: bags |> Enum.at(0) |> String.trim(".") |> String.split(",")
   @spec split_bags(binary) :: [binary]
-  defp split_bags(bags), do:
-    bags |> String.replace("bags", "") |> String.replace("bag", "") |> String.trim() |> String.split(" ", parts: 2)
+  defp split_bags(bags),
+    do: bags |> String.replace("bags", "") |> String.replace("bag", "") |> String.trim() |> String.split(" ", parts: 2)
 
   @spec solved_status :: atom()
-  def solved_status(), do: :unsolved
+  def solved_status(), do: :part1
 end
