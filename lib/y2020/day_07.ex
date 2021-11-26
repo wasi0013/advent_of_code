@@ -24,24 +24,26 @@ defmodule Aoc.Y2020.Day07 do
   def process_bags([{"shiny gold", _bags} | rest], cache, reset), do: process_bags(rest, cache, reset)
 
   def process_bags([{key, bags} | rest], cache, reset) do
-    cache =
-      if cache[key] != nil do
-        process_bags(rest, cache, reset)
-      else
-        if is_ready?(bags, cache) do
-          value = check_bags?(bags, cache)
-          cache = Map.update!(cache, key, fn _ -> value end)
-          process_bags(rest, cache, reset)
-        else
-          if is_empty?(bags, cache),
-            do: process_bags(rest, Map.update!(cache, key, fn _ -> false end), reset),
-            else: process_bags(rest, cache, reset)
-        end
-      end
-
+    cache = update_cache(key, bags, rest, cache, reset)
     if Enum.any?(cache, fn {_key, value} -> value == nil end),
       do: process_bags(reset, cache, reset),
       else: cache
+  end
+
+  def update_cache(key, bags, rest, cache, reset) do
+    if cache[key] != nil do
+      process_bags(rest, cache, reset)
+    else
+      if is_ready?(bags, cache) do
+        value = check_bags?(bags, cache)
+        cache = Map.update!(cache, key, fn _ -> value end)
+        process_bags(rest, cache, reset)
+      else
+        if is_empty?(bags, cache),
+          do: process_bags(rest, Map.update!(cache, key, fn _ -> false end), reset),
+          else: process_bags(rest, cache, reset)
+      end
+    end
   end
 
   def check_bags?(bags, cache), do: Enum.any?(bags, fn [_n, bag] -> cache[bag] == true or bag == "shiny gold" end)
