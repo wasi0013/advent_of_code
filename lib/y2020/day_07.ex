@@ -15,34 +15,33 @@ defmodule Aoc.Y2020.Day07 do
     cache = Map.update(cache, "shiny gold", true, fn _ -> true end)
     cache = Map.update(cache, "other", false, fn _ -> false end)
 
-    process_bags(data, cache, 0, data)
-    |> elem(0)
+    process_bags(data, cache, data)
     |> Enum.count(fn {_key, value} -> value == true end)
     |> then(fn v -> v - 1 end)
   end
 
-  def process_bags([], cache, count, _reset), do: {cache, count}
-  def process_bags([{"shiny gold", _bags} | rest], cache, count, reset), do: process_bags(rest, cache, count, reset)
+  def process_bags([], cache, _reset), do: cache
+  def process_bags([{"shiny gold", _bags} | rest], cache, reset), do: process_bags(rest, cache, reset)
 
-  def process_bags([{key, bags} | rest], cache, count, reset) do
-    {cache, count} =
+  def process_bags([{key, bags} | rest], cache, reset) do
+    cache =
       if cache[key] != nil do
-        process_bags(rest, cache, count + if(cache[key] == true, do: 1, else: 0), reset)
+        process_bags(rest, cache, reset)
       else
         if is_ready?(bags, cache) do
           value = check_bags?(bags, cache)
           cache = Map.update!(cache, key, fn _ -> value end)
-          process_bags(rest, cache, count + if(cache[key] == true, do: 1, else: 0), reset)
+          process_bags(rest, cache, reset)
         else
           if is_empty?(bags, cache),
-            do: process_bags(rest, Map.update!(cache, key, fn _ -> false end), count, reset),
-            else: process_bags(rest, cache, count, reset)
+            do: process_bags(rest, Map.update!(cache, key, fn _ -> false end), reset),
+            else: process_bags(rest, cache, reset)
         end
       end
 
     if Enum.any?(cache, fn {_key, value} -> value == nil end),
-      do: process_bags(reset, cache, count, reset),
-      else: {cache, count}
+      do: process_bags(reset, cache, reset),
+      else: cache
   end
 
   def check_bags?(bags, cache), do: Enum.any?(bags, fn [_n, bag] -> cache[bag] == true or bag == "shiny gold" end)
