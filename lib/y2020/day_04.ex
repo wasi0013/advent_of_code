@@ -6,10 +6,8 @@ defmodule Aoc.Y2020.Day04 do
   @fields ~w[byr iyr eyr hgt hcl ecl pid]
   @range %{"in" => 59..76, "cm" => 150..193, "byr" => 1920..2002, "eyr" => 2020..2030, "iyr" => 2010..2020}
 
-  @spec run_part1 :: no_return
   def run_part1(), do: get_input() |> solve_part1()
 
-  @spec run_part2 :: no_return
   def run_part2(), do: get_input() |> solve_part2()
 
   def solve_part1(data) do
@@ -48,13 +46,11 @@ defmodule Aoc.Y2020.Day04 do
     end
   end
 
-  @spec get_input() :: no_return
   defp get_input() do
     get_string_input("2020", "04")
     |> String.split("\n\n")
     |> Enum.map(&String.split(&1, [" ", "\n"]))
   end
 
-  @spec solved_status :: atom()
   def solved_status(), do: :solved
 end

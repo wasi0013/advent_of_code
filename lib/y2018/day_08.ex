@@ -4,9 +4,7 @@ defmodule Aoc.Y2018.Day08 do
   """
   import Aoc.Helper.IO
 
-  @spec run_part1 :: no_return
   def run_part1, do: get_integer_input("2018", "08") |> solve_part1()
-  @spec run_part2 :: no_return
   def run_part2, do: get_integer_input("2018", "08") |> solve_part2()
 
   def solve_part1([child, meta | data]), do: calculate(data, child, meta, 0)
@@ -42,6 +40,5 @@ defmodule Aoc.Y2018.Day08 do
     value(data, pchild - 1, pmeta, 0, Map.put(cache, pchild, sum), true)
   end
 
-  @spec solved_status :: atom()
   def solved_status(), do: :solved
 end

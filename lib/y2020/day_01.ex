@@ -2,7 +2,6 @@ defmodule Aoc.Y2020.Day01 do
   @moduledoc false
   import Aoc.Helper.IO
 
-  @spec run_part1 :: no_return
   def run_part1(),
     do:
       get_string_input("2020", "01")
@@ -10,7 +9,6 @@ defmodule Aoc.Y2020.Day01 do
       |> Enum.map(&String.to_integer/1)
       |> solve_part1()
 
-  @spec run_part2 :: no_return
   def run_part2(),
     do:
       get_string_input("2020", "01")
@@ -34,6 +32,5 @@ defmodule Aoc.Y2020.Day01 do
     head
   end
 
-  @spec solved_status :: atom()
   def solved_status(), do: :solved
 end

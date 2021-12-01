@@ -4,9 +4,7 @@ defmodule Aoc.Y2017.Day09 do
   """
   import Aoc.Helper.IO
 
-  @spec run_part1 :: no_return()
   def run_part1, do: get_string_input("2017", "09") |> solve_part1()
-  @spec run_part2 :: no_return()
   def run_part2, do: get_string_input("2017", "09") |> solve_part2()
 
   def solve_part1(data),
@@ -25,6 +23,5 @@ defmodule Aoc.Y2017.Day09 do
   def count_garbage(data),
     do: Enum.map(data, fn [h | _t] -> String.length(h) - 2 end) |> Enum.sum()
 
-  @spec solved_status :: atom()
   def solved_status(), do: :solved
 end
