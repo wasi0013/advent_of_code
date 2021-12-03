@@ -14,7 +14,7 @@ defmodule Aoc.Y2021.Day03 do
   defp find_common_bits(data, bit),
     do: data |> Enum.map(fn item -> Enum.count(item, &(&1 == bit)) >= Enum.count(item, &(&1 == flip_bit(bit))) end)
 
-  defp flip_bit(bit), do: if(bit == "0", do: "1", else: "0")
+  defp flip_bit(bit), do: if bit == "0", do: "1", else: "0"
 
   defp convert(data),
     do: data |> Enum.map(fn v -> if v, do: "1", else: "0" end) |> Enum.join() |> Integer.parse(2) |> elem(0)
