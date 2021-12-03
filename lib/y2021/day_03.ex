@@ -24,14 +24,14 @@ defmodule Aoc.Y2021.Day03 do
   defp get_rating([x], _bool, _pos), do: x |> Enum.join() |> Integer.parse(2) |> elem(0)
 
   defp get_rating(bits, bool, pos) do
-    bits |> Enum.filter(fn value -> Enum.at(value, pos) == pick_bits(bits, pos, bool) end) |> get_rating(bool, pos + 1)
+    bits |> Enum.filter(fn value -> Enum.at(value, pos) == pick_bit(bits, pos, bool) end) |> get_rating(bool, pos + 1)
   end
 
   defp get_most_common_bits(data),
     do: data |> transpose |> find_common_bits("1") |> Enum.map(fn value -> if value, do: "1", else: "0" end)
 
-  defp pick_bits(bits, pos, true), do: bits |> get_most_common_bits() |> Enum.at(pos)
-  defp pick_bits(bits, pos, false), do: bits |> get_most_common_bits() |> Enum.at(pos) |> flip_bit()
+  defp pick_bit(bits, pos, true), do: bits |> get_most_common_bits() |> Enum.at(pos)
+  defp pick_bit(bits, pos, false), do: bits |> get_most_common_bits() |> Enum.at(pos) |> flip_bit()
 
   defp get_input(), do: get_string_input("2021", "03") |> String.split("\n") |> Enum.map(&String.graphemes/1)
 
