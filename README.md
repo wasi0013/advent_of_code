@@ -160,6 +160,15 @@ run `mix test`
    
    </tr>
 
+  <tr>
+   <td><a href="https://adventofcode.com/2021/day/4">2021</a></td>
+   <td><a href='https://github.com/wasi0013/advent_of_code/blob/master/lib/y2021/day_04.ex'> 4</a></td>
+   <td> :green_circle: :green_circle: </td>
+   
+   
+   
+   </tr>
+
   </tr>
 
 </table>
