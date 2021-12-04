@@ -10,19 +10,16 @@ defmodule Aoc.Y2021.Day04 do
 
   def solve_part1({[num | rest], boards}, {[], _num}) do
     marked_boards = boards |> Enum.map(&mark_board(&1, num))
-    scan = {Enum.filter(marked_boards, &check_winner?/1), num}
-    solve_part1({rest, marked_boards}, scan)
+    winner = {Enum.filter(marked_boards, &check_winner?/1), num}
+    solve_part1({rest, marked_boards}, winner)
   end
 
-  def solve_part1({_, _}, {[board | _rest], num}),
-    do: calculate_result({board, num})
+  def solve_part1({_, _}, {[board | _rest], num}), do: calculate_result({board, num})
 
   defp calculate_result({board, num}),
     do: board |> List.flatten() |> Enum.reject(&(&1 === true)) |> Enum.sum() |> then(fn total -> num * total end)
 
-  def solve_part2({[], _marked_boards}, result, winner) do
-    calculate_result(Map.get(result, hd(winner)))
-  end
+  def solve_part2({[], _marked_boards}, result, winner), do: calculate_result(Map.get(result, hd(winner)))
 
   def solve_part2({[num | rest], boards}, result, winner) do
     marked_boards = boards |> Enum.map(&mark_board(&1, num))
@@ -46,9 +43,9 @@ defmodule Aoc.Y2021.Day04 do
   defp update_result([], _num, _marked_boards, result), do: result
 
   defp update_result([board | boards], num, marked_boards, result),
-    do: update_result(boards, num, marked_boards, get_result(num, board, marked_boards, result))
+    do: update_result(boards, num, marked_boards, get_new_result(num, board, marked_boards, result))
 
-  defp get_result(num, board, marked_boards, result) do
+  defp get_new_result(num, board, marked_boards, result) do
     if Enum.find_index(marked_boards, &(&1 == board)) in Map.keys(result) do
       result
     else
