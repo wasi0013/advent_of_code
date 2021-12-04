@@ -61,7 +61,7 @@ defmodule Aoc.Y2021.Day04 do
   defp check_winner?(board), do: board_winning?(board) or board_winning?(transpose(board))
   defp board_winning?(board), do: board |> Enum.map(&winning_row?/1) |> winning?()
   defp winning_row?(row), do: row |> Enum.all?(&(&1 === true))
-  defp winning?(row), do: row |> Enum.any?(&(&1 === true))
+  defp winning?(rows), do: rows |> Enum.any?(&(&1 === true))
   defp get_input(), do: get_string_input("2021", "04") |> String.split("\n\n", trim: true) |> parse_input
 
   defp parse_input([inputs | boards]),
