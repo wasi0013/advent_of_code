@@ -31,9 +31,9 @@ defmodule Aoc.Y2021.Day04 do
     solve_part2({rest, marked_boards}, result, winner)
   end
 
-  def update_winner([], _, winner), do: winner
+  defp update_winner([], _, winner), do: winner
 
-  def update_winner([board | boards], marked_boards, winner) do
+  defp update_winner([board | boards], marked_boards, winner) do
     if Enum.find_index(marked_boards, &(&1 == board)) in winner do
       update_winner(boards, marked_boards, winner)
     else
@@ -43,27 +43,25 @@ defmodule Aoc.Y2021.Day04 do
     end
   end
 
-  def update_result([], _num, _marked_boards, result), do: result
+  defp update_result([], _num, _marked_boards, result), do: result
 
-  def update_result([board | boards], num, marked_boards, result) do
-    result =
-      if Enum.find_index(marked_boards, &(&1 == board)) in Map.keys(result) do
-        result
-      else
-        if check_winner?(board) do
-          Map.put_new(result, Enum.find_index(marked_boards, &(&1 == board)), {board, num})
-        else
-          result
-        end
-      end
+  defp update_result([board | boards], num, marked_boards, result),
+    do: update_result(boards, num, marked_boards, get_result(num, board, marked_boards, result))
 
-    update_result(boards, num, marked_boards, result)
+  defp get_result(num, board, marked_boards, result) do
+    if Enum.find_index(marked_boards, &(&1 == board)) in Map.keys(result) do
+      result
+    else
+      if check_winner?(board),
+        do: Map.put_new(result, Enum.find_index(marked_boards, &(&1 == board)), {board, num}),
+        else: result
+    end
   end
 
-  def mark_board(board, num),
+  defp mark_board(board, num),
     do: board |> Enum.map(&Enum.map(&1, fn value -> if value == num, do: true, else: value end))
 
-  def check_winner?(board), do: board_winning?(board) or board_winning?(transpose(board))
+  defp check_winner?(board), do: board_winning?(board) or board_winning?(transpose(board))
   defp board_winning?(board), do: board |> Enum.map(&winning_row?/1) |> winning?()
   defp winning_row?(row), do: row |> Enum.all?(&(&1 === true))
   defp winning?(row), do: row |> Enum.any?(&(&1 === true))
