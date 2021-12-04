@@ -78,5 +78,5 @@ defmodule Aoc.Y2021.Day04 do
       |> String.split("\n", trim: true)
       |> Enum.map(fn item -> String.split(item, " ", trim: true) |> Enum.map(&String.to_integer/1) end)
 
-  def solved_status(), do: :unsolved
+  def solved_status(), do: :solved
 end
