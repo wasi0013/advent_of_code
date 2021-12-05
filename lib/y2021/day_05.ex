@@ -62,12 +62,11 @@ defmodule Aoc.Y2021.Day05 do
 
   defp get_input() do
     get_string_input("2021", "05")
-    |> String.split("\n", trim: true)
-    |> Enum.map(&String.split(&1, " -> ", trim: true))
-    |> Enum.map(&Enum.map(&1, fn item -> String.split(item, ",", trim: true) end))
-    |> List.flatten()
+    |> String.replace([" -> ", "\n", ","], " ")
+    |> String.split(" ", trim: true)
     |> Enum.map(&String.to_integer/1)
     |> Enum.chunk_every(4, 4, :discard)
+
   end
 
   def solved_status(), do: :solved
