@@ -1,6 +1,6 @@
 defmodule AocTest.Y<%= year %>.Day<%= String.pad_leading(Integer.to_string(day), 2, "0") %>Test do
   @moduledoc false
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   import Aoc.Y<%= year %>.Day<%= String.pad_leading(Integer.to_string(day), 2, "0") %>
   @example []
   test "Part 1 Example" do
