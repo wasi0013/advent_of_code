@@ -1,6 +1,6 @@
 defmodule AocTest.Y2020.Day07Test do
   @moduledoc false
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   import Aoc.Y2020.Day07
 
   test "Part 1 is solved" do

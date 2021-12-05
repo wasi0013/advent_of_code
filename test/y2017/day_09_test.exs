@@ -1,6 +1,6 @@
 defmodule AocTest.Y2017.Day09Test do
   @moduledoc false
-  use ExUnit.Case
+  use ExUnit.Case, async: true
 
   test "Part1 Example: {} score of 1" do
     assert Aoc.Y2017.Day09.solve_part1("{}") == 1

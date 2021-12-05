@@ -1,7 +1,7 @@
 defmodule AocTest.Y2019.Day01Test do
   @moduledoc false
 
-  use ExUnit.Case
+  use ExUnit.Case, async: true
 
   test "Part1 Example: mass 12" do
     assert Aoc.Y2019.Day01.solve_part1([12]) == 2

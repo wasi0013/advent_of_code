@@ -1,6 +1,6 @@
 defmodule AocTest.Y2020.Day01Test do
   @moduledoc false
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   @example [1721, 979, 366, 299, 675, 1456]
   test "Part 1 Example: answer 514579" do
     assert Aoc.Y2020.Day01.solve_part1(@example) == 514_579

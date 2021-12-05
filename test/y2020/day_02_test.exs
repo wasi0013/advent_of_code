@@ -1,6 +1,6 @@
 defmodule AocTest.Y2020.Day02Test do
   @moduledoc false
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   @sample [["1", "3", "a", "abcde"], ["1", "3", "b", "cdefg"], ["2", "9", "c", "ccccccccc"]]
 
   test "Part 1 Example: " do

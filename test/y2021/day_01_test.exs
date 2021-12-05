@@ -1,6 +1,6 @@
 defmodule AocTest.Y2021.Day01Test do
   @moduledoc false
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   import Aoc.Y2021.Day01
   @example [199, 200, 208, 210, 200, 207, 240, 269, 260, 263]
   test "Part 1 Example" do

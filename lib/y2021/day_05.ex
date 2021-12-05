@@ -8,20 +8,11 @@ defmodule Aoc.Y2021.Day05 do
   def run_part1(), do: get_input() |> solve_part1()
   def run_part2(), do: get_input() |> solve_part2()
 
-  def solve_part1(data) do
-    data
-    |> Enum.filter(fn [x1, y1, x2, y2] -> x1 == x2 or y1 == y2 end)
-    |> populate_grid(data |> get_max() |> gen_grid())
-    |> Map.values()
-    |> Enum.count(fn i -> i > 1 end)
-  end
+  def solve_part1(data), do: data |> Enum.filter(fn [a, b, x, y] -> a == x or b == y end) |> count_overlaps()
+  def solve_part2(data), do: data |> count_overlaps()
 
-  def solve_part2(data) do
-    data
-    |> populate_grid(data |> get_max() |> gen_grid())
-    |> Map.values()
-    |> Enum.count(&(&1 > 1))
-  end
+  defp count_overlaps(data),
+    do: data |> populate_grid(data |> get_max() |> gen_grid()) |> Map.values() |> Enum.count(&(&1 > 1))
 
   defp populate_grid([], grid), do: grid
   defp populate_grid([[x, x, y, y] | data], grid), do: populate_grid(data, update_grid(x, y, grid))
@@ -66,7 +57,6 @@ defmodule Aoc.Y2021.Day05 do
     |> String.split(" ", trim: true)
     |> Enum.map(&String.to_integer/1)
     |> Enum.chunk_every(4, 4, :discard)
-
   end
 
   def solved_status(), do: :solved

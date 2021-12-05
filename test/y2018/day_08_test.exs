@@ -2,7 +2,7 @@ defmodule AocTest.Y2018.Day08Test do
   @moduledoc false
   @example [2, 3, 0, 3, 10, 11, 12, 1, 1, 0, 1, 99, 2, 1, 1, 2]
 
-  use ExUnit.Case
+  use ExUnit.Case, async: true
 
   test "Part1 Example: #{@example}" do
     assert Aoc.Y2018.Day08.solve_part1(@example) == 138

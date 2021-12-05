@@ -1,6 +1,6 @@
 defmodule AocTest.Y2020.Day04Test do
   @moduledoc false
-  use ExUnit.Case
+  use ExUnit.Case, async: true
 
   test "Part 1 is solved" do
     assert Aoc.Y2020.Day04.run_part1() == 200
