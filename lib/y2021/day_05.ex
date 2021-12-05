@@ -53,8 +53,7 @@ defmodule Aoc.Y2021.Day05 do
 
   defp get_input() do
     get_string_input("2021", "05")
-    |> String.replace([" -> ", "\n", ","], " ")
-    |> String.split(" ", trim: true)
+    |> String.split(["\n", " -> ", ",", " "], trim: true)
     |> Enum.map(&String.to_integer/1)
     |> Enum.chunk_every(4, 4, :discard)
   end
