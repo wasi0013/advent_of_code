@@ -10,11 +10,11 @@ defmodule Aoc.Y2021.Day07 do
   def solve_part1(data), do: data |> min_fuel_cost()
   def solve_part2(data), do: data |> min_fuel_cost(false)
 
-  def min_fuel_cost(data, simple \\ true), do: Enum.min(Enum.map(data, &fuel_cost(data, &1, simple)))
-  def fuel_cost(data, fuel, true), do: Enum.sum(Enum.map(data, fn item -> abs(item - fuel) end))
+  def min_fuel_cost(positions, simple \\ true), do: Enum.min(Enum.map(positions, &fuel_cost(positions, &1, simple)))
+  def fuel_cost(positions, fuel, true), do: Enum.sum(Enum.map(positions, fn pos -> abs(pos - fuel) end))
 
-  def fuel_cost(data, fuel, false),
-    do: Enum.sum(Enum.map(data, fn item -> div(abs(item - fuel) * (abs(item - fuel) + 1), 2) end))
+  def fuel_cost(positions, fuel, false),
+    do: Enum.sum(Enum.map(positions, fn pos -> div(abs(pos - fuel) * (abs(pos - fuel) + 1), 2) end))
 
   defp get_input(), do: get_integer_input("2021", "07", ",")
 
