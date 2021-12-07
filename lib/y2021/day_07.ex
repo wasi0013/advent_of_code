@@ -18,5 +18,5 @@ defmodule Aoc.Y2021.Day07 do
 
   defp get_input(), do: get_integer_input("2021", "07", ",")
 
-  def solved_status(), do: :unsolved
+  def solved_status(), do: :solved
 end
