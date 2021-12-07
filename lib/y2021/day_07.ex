@@ -7,7 +7,7 @@ defmodule Aoc.Y2021.Day07 do
   def run_part1(), do: get_input() |> solve_part1()
   def run_part2(), do: get_input() |> solve_part2()
 
-  def solve_part1(data), do: data |> fuel_count(true)
+  def solve_part1(data), do: data |> fuel_count()
   def solve_part2(data), do: data |> fuel_count(false)
 
   def fuel_count(data, simple \\ true), do: Enum.min(Enum.map(data, &fuel_cost(data, &1, simple)))
