@@ -36,9 +36,9 @@ defmodule Aoc.Y2021.Day08 do
     |> Enum.sum()
   end
 
-  def fix_output([digits, outputs], perms), do: find_value(perms, digits, outputs, nil)
-  def find_value(_perms, _digits, _outputs, output) when output != nil, do: output
-  def find_value([perm | rest], digits, outputs, _output) do
+  defp fix_output([digits, outputs], perms), do: find_value(perms, digits, outputs, nil)
+  defp find_value(_perms, _digits, _outputs, output) when output != nil, do: output
+  defp find_value([perm | rest], digits, outputs, _output) do
     output =
       if MapSet.subset?(MapSet.new(to_atoms(digits, perm)), MapSet.new(Map.keys(@digits))) do
         outputs
@@ -49,12 +49,12 @@ defmodule Aoc.Y2021.Day08 do
       end
     find_value(rest, digits, outputs, output)
   end
-  def to_atoms(digits, perm), do:
+  defp to_atoms(digits, perm), do:
     digits
     |> String.split(" ", trim: true)
     |> Enum.map(&String.graphemes/1)
     |> Enum.map(&(to_atom(&1, perm)))
-  def to_atom(digit, perm) do
+  defp to_atom(digit, perm) do
     Enum.map(digit, fn v -> Map.get(Map.new(Enum.zip(@default_segments, perm)), v) end)
     |> Enum.sort()
     |> Enum.join("")
