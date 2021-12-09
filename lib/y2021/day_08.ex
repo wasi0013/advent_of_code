@@ -6,7 +6,7 @@ defmodule Aoc.Y2021.Day08 do
   import Aoc.Helper.Util
 
   @digits %{abcdefg: 8, acf: 7, abdefg: 6, abdfg: 5, bcdf: 4, acdfg: 3, acdeg: 2, cf: 1, abcefg: 0, abcdfg: 9}
-  @default_segments ["a", "b", "c", "d", "e", "f", "g"]
+  @default_segments [?a, ?b, ?c, ?d, ?e, ?f, ?g]
 
   def run_part1(), do: get_input() |> solve_part1()
   def run_part2(), do: get_input() |> solve_part2()
@@ -26,7 +26,9 @@ defmodule Aoc.Y2021.Day08 do
   end
 
   defp fix_output([digits, outputs], perms), do: find_value(perms, digits, outputs, nil)
-  defp find_value(_perms, _digits, _outputs, output) when output != nil, do: output
+  defp find_value(_perms, _digits, _outputs, output) when output != nil do
+    output
+  end
 
   defp find_value([perm | rest], digits, outputs, _output) do
     output =
@@ -45,14 +47,13 @@ defmodule Aoc.Y2021.Day08 do
     do:
       digits
       |> String.split(" ", trim: true)
-      |> Enum.map(&String.graphemes/1)
+      |> Enum.map(&String.to_charlist/1)
       |> Enum.map(&to_atom(&1, perm))
 
   defp to_atom(digit, perm) do
     Enum.map(digit, fn v -> Map.get(Map.new(Enum.zip(@default_segments, perm)), v) end)
     |> Enum.sort()
-    |> Enum.join("")
-    |> String.to_atom()
+    |> List.to_atom()
   end
 
   defp get_input(),
