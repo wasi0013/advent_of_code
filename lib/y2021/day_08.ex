@@ -26,6 +26,7 @@ defmodule Aoc.Y2021.Day08 do
   end
 
   defp fix_output([digits, outputs], perms), do: find_value(perms, digits, outputs, nil)
+
   defp find_value(_perms, _digits, _outputs, output) when output != nil do
     output
   end
