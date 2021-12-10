@@ -3,6 +3,7 @@ defmodule Aoc.Y2021.Day10 do
   Solved https://adventofcode.com/2021/day/10
   """
   import Aoc.Helper.IO
+
   @symbols %{
     ")" => 3,
     "]" => 57,
@@ -19,7 +20,6 @@ defmodule Aoc.Y2021.Day10 do
     |> Enum.filter(&is_integer/1)
     |> Enum.sum()
   end
-
 
   def solve_part2(data) do
     data
@@ -47,6 +47,7 @@ defmodule Aoc.Y2021.Day10 do
   defp parse("", stack), do: stack
 
   defp get_score(symbol) when is_bitstring(symbol), do: Map.get(@symbols, symbol, 0)
+
   defp get_score(graphemes) when is_list(graphemes),
     do: Enum.reduce(graphemes, 0, fn v, acc -> acc * 5 + get_value(v) end)
 
