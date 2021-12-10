@@ -8,6 +8,7 @@ defmodule Aoc.Y2021.Day09 do
   def run_part2(), do: get_input() |> solve_part2()
 
   def solve_part1(data), do: data |> get_risk_levels() |> Enum.sum()
+
   def solve_part2(data) do
     data
     |> get_low_points()
@@ -17,8 +18,9 @@ defmodule Aoc.Y2021.Day09 do
     |> Enum.take(3)
     |> Enum.product()
   end
+
   def get_risk_levels(data),
-  do: data |> get_low_points() |> Enum.map(fn {i, j} -> Enum.at(Enum.at(data, i), j) + 1 end)
+    do: data |> get_low_points() |> Enum.map(fn {i, j} -> Enum.at(Enum.at(data, i), j) + 1 end)
 
   def get_low_points(data),
     do:
@@ -43,6 +45,7 @@ defmodule Aoc.Y2021.Day09 do
 
   def bfs(data, i, j, visited) do
     visited = MapSet.put(visited, {i, j})
+
     for {x, y} <- get_neighbors(data, i, j),
         Enum.at(Enum.at(data, x), y) != 9 and {x, y} not in visited,
         reduce: visited do
