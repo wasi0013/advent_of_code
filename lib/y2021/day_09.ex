@@ -8,47 +8,31 @@ defmodule Aoc.Y2021.Day09 do
   def run_part2(), do: get_input() |> solve_part2()
 
   def solve_part1(data), do: data |> get_risk_levels() |> Enum.sum()
-
+  def solve_part2(data) do
+    data
+    |> get_low_points()
+    |> Enum.map(fn {i, j} -> bfs(data, i, j, MapSet.new()) end)
+    |> Enum.map(&MapSet.size/1)
+    |> Enum.sort(:desc)
+    |> Enum.take(3)
+    |> Enum.product()
+  end
   def get_risk_levels(data),
+  do: data |> get_low_points() |> Enum.map(fn {i, j} -> Enum.at(Enum.at(data, i), j) + 1 end)
+
+  def get_low_points(data),
     do:
       for(
         i <- 0..(length(data) - 1),
         j <- 0..(length(Enum.at(data, 0)) - 1),
         lowest?(data, i, j),
-        do: Enum.at(Enum.at(data, i), j) + 1
+        do: {i, j}
       )
 
   def lowest?(data, i, j), do: Enum.at(Enum.at(data, i), j) < smallest_neighbor(data, i, j)
 
   def smallest_neighbor(data, i, j),
     do: Enum.min(Enum.map(get_neighbors(data, i, j), fn {x, y} -> Enum.at(Enum.at(data, x), y) end))
-
-  def solve_part2(data) do
-    get_basins(data)
-    |> then(fn %{visited: _, basins: basins} -> basins end)
-    |> Enum.to_list()
-    |> Enum.sort(:desc)
-    |> Enum.take(3)
-    |> Enum.reduce(1, fn value, acc -> acc * value end)
-  end
-
-  def get_basins(data) do
-    visited = MapSet.new()
-    basins = MapSet.new()
-
-    for i <- 0..(length(data) - 1),
-        j <- 0..(length(Enum.at(data, 0)) - 1),
-        Enum.at(Enum.at(data, i), j) != 9,
-        reduce: %{visited: visited, basins: basins} do
-      %{visited: visited, basins: basins} ->
-        if MapSet.member?(visited, {i, j}) do
-          %{visited: visited, basins: basins}
-        else
-          basin = bfs(data, i, j, MapSet.new())
-          %{visited: MapSet.union(visited, basin), basins: MapSet.put(basins, length(Enum.to_list(basin)))}
-        end
-    end
-  end
 
   def get_neighbors(data, i, j) do
     for [x, y] <- [[-1, 0], [0, 1], [1, 0], [0, -1]],
@@ -59,9 +43,8 @@ defmodule Aoc.Y2021.Day09 do
 
   def bfs(data, i, j, visited) do
     visited = MapSet.put(visited, {i, j})
-
-    for {x, y} <- MapSet.difference(MapSet.new(get_neighbors(data, i, j)), visited),
-        Enum.at(Enum.at(data, x), y) != 9,
+    for {x, y} <- get_neighbors(data, i, j),
+        Enum.at(Enum.at(data, x), y) != 9 and {x, y} not in visited,
         reduce: visited do
       visited -> MapSet.union(MapSet.put(visited, {x, y}), bfs(data, x, y, visited))
     end
