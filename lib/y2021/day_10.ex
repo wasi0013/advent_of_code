@@ -4,7 +4,7 @@ defmodule Aoc.Y2021.Day10 do
   """
   import Aoc.Helper.IO
 
-  @braces %{
+  @braces_score %{
     ")" => 3,
     "]" => 57,
     "}" => 1197,
@@ -46,7 +46,7 @@ defmodule Aoc.Y2021.Day10 do
   defp parse(<<brace::binary-size(1)>> <> _str, [pop | _stack]) when brace != pop, do: get_score(brace)
   defp parse("", stack), do: stack
 
-  defp get_score(brace) when is_bitstring(brace), do: Map.get(@braces, brace, 0)
+  defp get_score(brace) when is_bitstring(brace), do: Map.get(@braces_score, brace, 0)
 
   defp get_score(graphemes) when is_list(graphemes),
     do: Enum.reduce(graphemes, 0, fn v, acc -> acc * 5 + get_value(v) end)
