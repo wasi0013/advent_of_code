@@ -26,7 +26,6 @@ defmodule Aoc.Y2021.Day10 do
     |> Enum.map(&parse/1)
     |> Enum.reject(&is_integer/1)
     |> Enum.map(&get_score/1)
-    |> Enum.sort()
     |> median()
   end
 
