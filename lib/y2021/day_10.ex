@@ -55,7 +55,7 @@ defmodule Aoc.Y2021.Day10 do
   defp get_value("}"), do: 3
   defp get_value(">"), do: 4
 
-  defp median(positions), do: Enum.at(Enum.sort(positions), div(length(positions), 2))
+  defp median(list), do: Enum.at(Enum.sort(list), div(length(list), 2))
   defp get_input(), do: get_string_input("2021", "10") |> String.split("\n", trim: true)
 
   def solved_status(), do: :solved
