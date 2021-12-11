@@ -8,6 +8,6 @@ defmodule AocTest.Y2021.Day11Test do
   end
 
   test "Part 2 is solved" do
-    assert run_part2() == 299
+    assert run_part2() == 229
   end
 end
