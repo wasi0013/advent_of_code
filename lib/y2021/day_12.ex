@@ -14,8 +14,8 @@ defmodule Aoc.Y2021.Day12 do
     do:
       Enum.reduce(data, %{}, fn {from, to}, graph ->
         graph
-        |> Map.update(from, [to], fn vertices -> [to | vertices] end)
-        |> Map.update(to, [from], fn vertices -> [from | vertices] end)
+        |> Map.update(from, [to], fn neighbors -> [to | neighbors] end)
+        |> Map.update(to, [from], fn neighbors -> [from | neighbors] end)
       end)
 
   defp count(g, twice?), do: count(g, twice?, "start", ["start"], 0)
