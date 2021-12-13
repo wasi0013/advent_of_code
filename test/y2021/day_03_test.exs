@@ -36,6 +36,7 @@ defmodule AocTest.Y2021.Day03Test do
     assert run_part1() == 2_648_450
   end
 
+  @tag :slow
   test "Part 2 is solved" do
     assert run_part2() == 2_845_944
   end
