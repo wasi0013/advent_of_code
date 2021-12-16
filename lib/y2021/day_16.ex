@@ -8,9 +8,9 @@ defmodule Aoc.Y2021.Day16 do
   def run_part2(), do: get_input() |> solve_part2()
 
   def solve_part1(data), do: data |> hex_to_bin() |> parse() |> version_sum()
-  def solve_part2(data), do: data |> hex_to_bin() |> parse() |> evaluate()
+  def solve_part2(data), do: data |> hex_to_bin() |> parse() |> eval()
 
-  def parse([v1, v2, v3, 1, 0, 0 | bits]) do
+  defp parse([v1, v2, v3, 1, 0, 0 | bits]) do
     digits = extract(bits)
     extras = Enum.slice(bits, (div(length(digits), 4) * 5)..-1)
 
@@ -22,7 +22,7 @@ defmodule Aoc.Y2021.Day16 do
     }
   end
 
-  def parse([v1, v2, v3, t1, t2, t3, i = 0 | bits]) do
+  defp parse([v1, v2, v3, t1, t2, t3, i = 0 | bits]) do
     {bit_length, bits} = Enum.split(bits, 15)
     bit_length = bit_length |> Integer.undigits(2)
     {sub_packets, extras} = Enum.split(bits, bit_length)
@@ -37,7 +37,7 @@ defmodule Aoc.Y2021.Day16 do
     }
   end
 
-  def parse([v1, v2, v3, t1, t2, t3, i = 1 | bits]) do
+  defp parse([v1, v2, v3, t1, t2, t3, i = 1 | bits]) do
     {count, bits} = Enum.split(bits, 11)
     count = count |> Integer.undigits(2)
     {result, extras} = parse_subpackets(bits, count, [])
@@ -53,23 +53,23 @@ defmodule Aoc.Y2021.Day16 do
     }
   end
 
-  def parse(_), do: %{}
+  defp parse(_), do: %{}
 
-  def parse_subpackets([], result), do: result
+  defp parse_subpackets([], result), do: result
 
-  def parse_subpackets(data, result) do
+  defp parse_subpackets(data, result) do
     value = parse(data)
     parse_subpackets(Map.get(value, :extras, []), [value | result])
   end
 
-  def parse_subpackets(extras, 0, result), do: {result, extras}
+  defp parse_subpackets(extras, 0, result), do: {result, extras}
 
-  def parse_subpackets(data, count, result) do
+  defp parse_subpackets(data, count, result) do
     value = parse(data)
     parse_subpackets(Map.get(value, :extras, []), count - 1, [value | result])
   end
 
-  def version_sum(map) do
+  defp version_sum(map) do
     if Map.get(map, :sub_packets) do
       Map.get(map, :version, 0) + Enum.sum(Enum.map(Map.get(map, :sub_packets), fn m -> version_sum(m) end))
     else
@@ -77,34 +77,34 @@ defmodule Aoc.Y2021.Day16 do
     end
   end
 
-  def evaluate(map),
-    do: evaluate(map, Map.get(map, :type_id))
+  defp eval(map),
+    do: eval(map, Map.get(map, :type_id))
 
-  def evaluate(map, 4),
+  defp eval(map, 4),
     do: Map.get(map, :literal)
 
-  def evaluate(map, 0),
-    do: Enum.sum(Map.get(map, :sub_packets) |> Enum.map(&evaluate/1))
+  defp eval(map, 0),
+    do: Enum.sum(Map.get(map, :sub_packets) |> Enum.map(&eval/1))
 
-  def evaluate(map, 1),
-    do: Enum.product(Map.get(map, :sub_packets) |> Enum.map(&evaluate/1))
+  defp eval(map, 1),
+    do: Enum.product(Map.get(map, :sub_packets) |> Enum.map(&eval/1))
 
-  def evaluate(map, 2),
-    do: Enum.min(Map.get(map, :sub_packets) |> Enum.map(&evaluate/1))
+  defp eval(map, 2),
+    do: Enum.min(Map.get(map, :sub_packets) |> Enum.map(&eval/1))
 
-  def evaluate(map, 3),
-    do: Enum.max(Map.get(map, :sub_packets) |> Enum.map(&evaluate/1))
+  defp eval(map, 3),
+    do: Enum.max(Map.get(map, :sub_packets) |> Enum.map(&eval/1))
 
-  def evaluate(map, 5),
-    do: Map.get(map, :sub_packets) |> Enum.map(&evaluate/1) |> then(fn [m1, m2] -> (m1 < m2 && 1) || 0 end)
+  defp eval(map, 5),
+    do: Map.get(map, :sub_packets) |> Enum.map(&eval/1) |> then(fn [m1, m2] -> (m1 < m2 && 1) || 0 end)
 
-  def evaluate(map, 6),
-    do: Map.get(map, :sub_packets) |> Enum.map(&evaluate/1) |> then(fn [m1, m2] -> (m1 > m2 && 1) || 0 end)
+  defp eval(map, 6),
+    do: Map.get(map, :sub_packets) |> Enum.map(&eval/1) |> then(fn [m1, m2] -> (m1 > m2 && 1) || 0 end)
 
-  def evaluate(map, 7),
-    do: Map.get(map, :sub_packets) |> Enum.map(&evaluate/1) |> then(fn [m1, m2] -> (m1 == m2 && 1) || 0 end)
+  defp eval(map, 7),
+    do: Map.get(map, :sub_packets) |> Enum.map(&eval/1) |> then(fn [m1, m2] -> (m1 == m2 && 1) || 0 end)
 
-  def extract(bits) do
+  defp extract(bits) do
     bits
     |> Enum.chunk_every(5, 5, :discard)
     |> Enum.reduce({}, fn
