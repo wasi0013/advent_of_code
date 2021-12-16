@@ -38,9 +38,9 @@ defmodule Aoc.Y2021.Day15 do
       else
         pqueue =
           pqueue ++
-            Enum.map([[-1, 0], [0, 1], [1, 0], [0, -1]], fn [x, y] ->
+            (Enum.map([[-1, 0], [0, 1], [1, 0], [0, -1]], fn [x, y] ->
               {Map.get(cache, {row, column}), row + x, column + y}
-            end)
+            end) |> Enum.reject(fn {_, o, p} -> Map.get(cache, {o, p}) end))
 
         find_path(Enum.sort(pqueue), data, cache, row_size, column_size, n)
       end
