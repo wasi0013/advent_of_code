@@ -7,11 +7,11 @@ defmodule Aoc.Y2021.Day18 do
   def run_part1(), do: get_input() |> solve_part1()
   def run_part2(), do: get_input() |> solve_part2()
 
-  def solve_part1(data), do: data |> add |> calc_mag(3)
+  def solve_part1(data), do: data |> add |> calc_mag
 
   def solve_part2(data, result \\ -1) do
     for a <- data, b <- data, reduce: result do
-      result -> max(result, [a, b] |> add |> calc_mag(3))
+      result -> max(result, [a, b] |> add |> calc_mag)
     end
   end
 
@@ -64,6 +64,7 @@ defmodule Aoc.Y2021.Day18 do
 
   def split([snail | snails], prev), do: split(snails, [snail | prev])
 
+  def calc_mag(snails), do: calc_mag(snails, 3)
   def calc_mag([{_, num1}, {_, num2}], 0), do: num1 * 3 + num2 * 2
 
   def calc_mag(snails, n),

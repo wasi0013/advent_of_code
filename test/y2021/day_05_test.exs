@@ -22,10 +22,12 @@ defmodule AocTest.Y2021.Day05Test do
   test "Part 2 Example" do
     assert solve_part2(@example) == 12
   end
+
   @tag :slow
   test "Part 1 is solved" do
     assert run_part1() == 6_005
   end
+
   @tag :slow
   test "Part 2 is solved" do
     assert run_part2() == 23_864
