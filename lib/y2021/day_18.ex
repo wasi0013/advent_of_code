@@ -11,7 +11,7 @@ defmodule Aoc.Y2021.Day18 do
 
   def solve_part2(data, result \\ -1) do
     for a <- data, b <- data, reduce: result do
-      result -> max(result, [a, b] |> add |> calc_mag)
+      result -> [a, b] |> add |> calc_mag |> max(result)
     end
   end
 
