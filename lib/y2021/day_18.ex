@@ -31,20 +31,20 @@ defmodule Aoc.Y2021.Day18 do
   def explode(snails), do: explode(snails, snails, 0)
   def explode([], result, _i), do: result
 
-  def explode([{depth, value} | _snails], result, i) when depth == 4 do
+  def explode([{depth, num} | _snails], result, i) when depth == 4 do
     result
     |> then(fn result ->
       if i > 0 do
-        {prev_level, prev_value} = Enum.at(result, i - 1)
-        List.replace_at(result, i - 1, {prev_level, value + prev_value})
+        {prev_depth, prev_num} = Enum.at(result, i - 1)
+        List.replace_at(result, i - 1, {prev_depth, num + prev_num})
       else
         result
       end
     end)
     |> then(fn result ->
       if i + 2 < length(result) do
-        {prev_level, prev_value} = Enum.at(result, i + 2)
-        List.replace_at(result, i + 2, {prev_level, prev_value + (Enum.at(result, i + 1) |> elem(1))})
+        {prev_depth, prev_num} = Enum.at(result, i + 2)
+        List.replace_at(result, i + 2, {prev_depth, prev_num + (Enum.at(result, i + 1) |> elem(1))})
       else
         result
       end
@@ -64,7 +64,7 @@ defmodule Aoc.Y2021.Day18 do
 
   def split([snail | snails], prev), do: split(snails, [snail | prev])
 
-  def calc_mag([{_, value1}, {_, value2}], 0), do: value1 * 3 + value2 * 2
+  def calc_mag([{_, num1}, {_, num2}], 0), do: num1 * 3 + num2 * 2
 
   def calc_mag(snails, n),
     do:
@@ -76,10 +76,10 @@ defmodule Aoc.Y2021.Day18 do
   def reduce_mag(snails, depth), do: reduce_mag(snails, snails, depth, 0)
   def reduce_mag([], result, _depth, _i), do: result
 
-  def reduce_mag([{depth, value} | _snails], result, depth, i) do
-    value1 = Enum.at(result, i + 1) |> elem(1)
+  def reduce_mag([{depth, num} | _snails], result, depth, i) do
+    num1 = Enum.at(result, i + 1) |> elem(1)
 
-    List.replace_at(result, i, {depth - 1, value * 3 + value1 * 2})
+    List.replace_at(result, i, {depth - 1, num * 3 + num1 * 2})
     |> List.pop_at(i + 1)
     |> elem(1)
   end
