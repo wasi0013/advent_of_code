@@ -89,10 +89,10 @@ defmodule Aoc.Y2021.Day18 do
   def flat_list(snails, depth \\ 0, flat_list \\ [])
   def flat_list([], _depth, flat_list), do: flat_list
 
-  def flat_list([h | snails], depth, flat_list) when is_list(h),
-    do: flat_list(snails, depth, flat_list(h, depth + 1, flat_list))
+  def flat_list([snail | snails], depth, flat_list) when is_list(snail),
+    do: flat_list(snails, depth, flat_list(snail, depth + 1, flat_list))
 
-  def flat_list([h | snails], depth, flat_list), do: flat_list(snails, depth, [{depth, h} | flat_list])
+  def flat_list([num | snails], depth, flat_list), do: flat_list(snails, depth, [{depth, num} | flat_list])
 
   defp get_input() do
     get_string_input("2021", "18")
