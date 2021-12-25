@@ -44,7 +44,6 @@ defmodule Aoc.Y2021.Day25 do
   end
 
   defp make_grid(data) do
-
     for y <- 0..(length(data) - 1), x <- 0..(length(Enum.at(data, 0)) - 1), reduce: [[], []] do
       [right_facing, down_facing] ->
         if Enum.at(Enum.at(data, y), x) == ">" do
