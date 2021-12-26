@@ -5,8 +5,6 @@ defmodule Aoc.Y2021.Day25 do
   import Aoc.Helper.IO
 
   def run_part1(), do: get_input() |> solve_part1()
-  def run_part2(), do: get_input() |> solve_part2()
-
   def solve_part1(data), do: data |> make_grid() |> count(1, length(Enum.at(data, 0)), length(data))
 
   defp count([right_facing, down_facing], step, max_x, max_y) do
@@ -59,15 +57,11 @@ defmodule Aoc.Y2021.Day25 do
     |> Enum.map(&MapSet.new/1)
   end
 
-  def solve_part2(_data) do
-    :unsolved
-  end
-
   defp get_input() do
     get_string_input("2021", "25")
     |> String.split("\n", trim: true)
     |> Enum.map(&String.graphemes/1)
   end
 
-  def solved_status(), do: :part1
+  def solved_status(), do: :solved
 end
