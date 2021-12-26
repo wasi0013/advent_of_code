@@ -10,9 +10,9 @@ defmodule Aoc.Y2021.Day19 do
   def solve_part1(scanners), do: scanners |> count()
   def solve_part2(scanners), do: scanners |> find_largest_distance()
 
-  def count({[], beacons}), do: beacons |> MapSet.size()
+  defp count({[], beacons}), do: beacons |> MapSet.size()
 
-  def count({scanners, beacons}) do
+  defp count({scanners, beacons}) do
     Enum.reduce(scanners, {scanners, beacons}, fn scanner, {rest, beacons} ->
       if (matched = find_match_point(scanner, beacons)) != [] do
         {List.delete(rest, scanner), update_beacons(matched, beacons, scanner)}
@@ -23,14 +23,14 @@ defmodule Aoc.Y2021.Day19 do
     |> count()
   end
 
-  def count(scanners), do: count({scanners, scanners |> hd |> MapSet.new()})
+  defp count(scanners), do: count({scanners, scanners |> hd |> MapSet.new()})
 
-  def find_largest_distance({[], _beacons, points}),
+  defp find_largest_distance({[], _beacons, points}),
     do:
       Enum.flat_map(points, fn point1 -> Enum.map(points, fn point2 -> manhatten_distance(point1, point2) end) end)
       |> Enum.max()
 
-  def find_largest_distance({scanners, beacons, points}) do
+  defp find_largest_distance({scanners, beacons, points}) do
     Enum.reduce(scanners, {scanners, beacons, points}, fn scanner, {rest, beacons, points} ->
       if (matched = find_match_point(scanner, beacons)) != [] do
         {List.delete(rest, scanner), update_beacons(matched, beacons, scanner), [matched |> hd() |> elem(0) | points]}
@@ -41,12 +41,12 @@ defmodule Aoc.Y2021.Day19 do
     |> find_largest_distance()
   end
 
-  def find_largest_distance(scanners), do: find_largest_distance({scanners, scanners |> hd |> MapSet.new(), []})
+  defp find_largest_distance(scanners), do: find_largest_distance({scanners, scanners |> hd |> MapSet.new(), []})
 
-  def update_beacons([{point, rmatrix}], beacons, scanner),
+  defp update_beacons([{point, rmatrix}], beacons, scanner),
     do: Enum.map(scanner, &add(rotate(&1, rmatrix), point)) |> MapSet.new() |> MapSet.union(beacons)
 
-  def find_match_point(scanner, beacons) do
+  defp find_match_point(scanner, beacons) do
     Enum.flat_map(rotations(), fn rmatrix ->
       scanner
       |> Enum.map(fn point -> rotate(point, rmatrix) end)
@@ -70,9 +70,9 @@ defmodule Aoc.Y2021.Day19 do
     )
   end
 
-  def add([x, y, z], [a, b, c]), do: [x + a, y + b, z + c]
-  def subtract([x, y, z], [a, b, c]), do: [a - x, b - y, c - z]
-  def manhatten_distance([a, b, c], [d, e, f]), do: abs(d - a) + abs(e - b) + abs(f - c)
+  defp add([x, y, z], [a, b, c]), do: [x + a, y + b, z + c]
+  defp subtract([x, y, z], [a, b, c]), do: [a - x, b - y, c - z]
+  defp manhatten_distance([a, b, c], [d, e, f]), do: abs(d - a) + abs(e - b) + abs(f - c)
 
   defp rotate([x, y, z], [[a, b, c], [d, e, f], [g, h, i]]),
     do: [x * a + y * b + z * c, x * d + y * e + z * f, x * g + y * h + z * i]
