@@ -7,5 +7,4 @@ defmodule AocTest.Y2021.Day25Test do
   test "Part 1 is solved" do
     assert run_part1() == 435
   end
-
 end
