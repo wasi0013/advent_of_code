@@ -35,9 +35,9 @@ defmodule Aoc.Y2022.Day02 do
       |> Enum.map(&String.to_charlist/1)
 
   defp parse(data), do: data |> Enum.map(fn [op, _, plyr_move] -> [op - ?A + 1, plyr_move - ?X + 1] end)
-  defp calculate_score([@rock, @scissor]), do: @scissor
-  defp calculate_score([@paper, @rock]), do: @paper
-  defp calculate_score([@scissor, @paper]), do: @paper
+  defp calculate_score([@rock, @scissor]), do: 0 + @scissor
+  defp calculate_score([@paper, @rock]), do: 0 + @rock
+  defp calculate_score([@scissor, @paper]), do: 0 + @paper
   defp calculate_score([ditto, ditto]), do: 3 + ditto
   defp calculate_score([_op_move, plyr_move]), do: 6 + plyr_move
 
