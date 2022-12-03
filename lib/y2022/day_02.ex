@@ -13,32 +13,32 @@ defmodule Aoc.Y2022.Day02 do
   def run_part1(), do: get_input() |> solve_part1()
   def run_part2(), do: get_input() |> solve_part2()
 
-  def solve_part1(data) do
-    data
-    |> parse()
-    |> Enum.map(&calculate_score/1)
-    |> Enum.sum()
-  end
+  def solve_part1(data),
+    do:
+      data
+      |> parse()
+      |> Enum.map(&calculate_score/1)
+      |> Enum.sum()
 
-  def solve_part2(data) do
-    data
-    |> parse()
-    |> Enum.map(&decrypt_strategy/1)
-    |> Enum.map(&calculate_score/1)
-    |> Enum.sum()
-  end
+  def solve_part2(data),
+    do:
+      data
+      |> parse()
+      |> Enum.map(&decrypt_strategy/1)
+      |> Enum.map(&calculate_score/1)
+      |> Enum.sum()
 
-  defp get_input() do
-    get_string_input("2022", "02")
-    |> String.split("\n", trim: true)
-    |> Enum.map(&String.to_charlist/1)
-  end
+  defp get_input(),
+    do:
+      get_string_input("2022", "02")
+      |> String.split("\n", trim: true)
+      |> Enum.map(&String.to_charlist/1)
 
   defp parse(data), do: data |> Enum.map(fn [op, _, plyr_move] -> [op - ?A + 1, plyr_move - ?X + 1] end)
-  defp calculate_score([op, plyr_move]) when op == @rock and plyr_move == @scissor, do: plyr_move
-  defp calculate_score([op, plyr_move]) when op == @paper and plyr_move == @rock, do: plyr_move
-  defp calculate_score([op, plyr_move]) when op == @scissor and plyr_move == @paper, do: plyr_move
-  defp calculate_score([op, plyr_move]) when op == plyr_move, do: 3 + plyr_move
+  defp calculate_score([@rock, @scissor]), do: @scissor
+  defp calculate_score([@paper, @rock]), do: @paper
+  defp calculate_score([@scissor, @paper]), do: @paper
+  defp calculate_score([ditto, ditto]), do: 3 + ditto
   defp calculate_score([_op_move, plyr_move]), do: 6 + plyr_move
 
   defp decrypt_strategy([@rock, @lose]), do: [@rock, @scissor]
