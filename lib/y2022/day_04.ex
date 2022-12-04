@@ -22,6 +22,7 @@ defmodule Aoc.Y2022.Day04 do
   def fits?([_, y1, _, y2]), do: y2 >= y1
 
   def overlaps?([x1, y1, x2, y2]), do: Enum.empty?(MapSet.intersection(MapSet.new(x1..y1), MapSet.new(x2..y2))) == false
+
   defp get_input() do
     get_string_input("2022", "04")
     |> String.split(["\n", ",", "-"], trim: true)
