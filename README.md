@@ -370,8 +370,8 @@ run `mix test`
   <tr>
    <td><a href="https://adventofcode.com/2022/day/4">2022</a></td>
    <td><a href='https://github.com/wasi0013/advent_of_code/blob/master/lib/y2022/day_04.ex'> 4</a></td>
+   <td> :green_circle: :green_circle: </td>
    
-   <td> :white_circle: :white_circle: </td>
    
    
    </tr>
