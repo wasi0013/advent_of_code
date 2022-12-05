@@ -21,5 +21,6 @@ defmodule Mix.Tasks.UpdateReadme do
          Integer.parse(String.replace(item, ["Y", "Day"], "")) |> elem(0)
        end)}
     )
+    |> Enum.reverse()
   end
 end
