@@ -7,10 +7,6 @@ defmodule Aoc.Y2020.Day03 do
 
   import Aoc.Helper.IO
 
-  def run_part1(), do: get_input() |> solve_part1()
-
-  def run_part2(), do: get_input() |> solve_part2()
-
   def solve_part1(data) do
     traverse(data, 0, 3, 1, 0)
   end
@@ -38,7 +34,7 @@ defmodule Aoc.Y2020.Day03 do
 
   defp found_tree?(row, position), do: if(Enum.at(row, rem(position, length(row))) == @tree, do: 1, else: 0)
 
-  defp get_input(), do: get_string_input("2020", "03") |> String.split("\n") |> Enum.map(&String.graphemes/1)
+  def get_input(), do: get_string_input("2020", "03") |> String.split("\n") |> Enum.map(&String.graphemes/1)
 
   def solved_status(), do: :solved
 end

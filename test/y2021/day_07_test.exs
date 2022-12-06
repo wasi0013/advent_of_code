@@ -13,10 +13,10 @@ defmodule AocTest.Y2021.Day07Test do
   end
 
   test "Part 1 is solved" do
-    assert run_part1() == 359_648
+    assert solve_part1(get_input()) == 359_648
   end
 
   test "Part 2 is solved" do
-    assert run_part2() == 100_727_924
+    assert solve_part2(get_input()) == 100_727_924
   end
 end

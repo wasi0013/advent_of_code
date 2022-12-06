@@ -4,9 +4,6 @@ defmodule Aoc.Y2021.Day07 do
   """
   import Aoc.Helper.IO
 
-  def run_part1(), do: get_input() |> solve_part1()
-  def run_part2(), do: get_input() |> solve_part2()
-
   def solve_part1(data), do: data |> cheapest_alignment()
   def cheapest_alignment(positions), do: fuel_cost(positions, median(positions))
   def fuel_cost(positions, fuel), do: Enum.sum(Enum.map(positions, fn pos -> abs(pos - fuel) end))
@@ -22,7 +19,7 @@ defmodule Aoc.Y2021.Day07 do
   defp median(positions), do: Enum.at(Enum.sort(positions), div(length(positions), 2))
   defp get_range(positions), do: Enum.min_max(positions) |> then(fn {min, max} -> min..max end)
 
-  defp get_input(), do: get_integer_input("2021", "07", ",")
+  def get_input(), do: get_integer_input("2021", "07", ",")
 
   def solved_status(), do: :solved
 end

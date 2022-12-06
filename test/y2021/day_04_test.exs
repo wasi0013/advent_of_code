@@ -36,10 +36,10 @@ defmodule AocTest.Y2021.Day04Test do
   end
 
   test "Part 1 is solved" do
-    assert run_part1() == 50_008
+    assert solve_part1(get_input(), {[], 0}) == 50_008
   end
 
   test "Part 2 is solved" do
-    assert run_part2() == 17_408
+    assert solve_part2(get_input(), %{}, []) == 17_408
   end
 end

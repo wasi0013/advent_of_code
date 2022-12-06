@@ -50,7 +50,7 @@ defmodule Aoc.Y2019.Day02 do
     100 * noun + verb
   end
 
-  defp get_input() do
+  def get_input() do
     get_string_input("2019", "02")
     |> String.trim()
     |> String.split(",")

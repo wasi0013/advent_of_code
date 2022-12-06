@@ -7,9 +7,6 @@ defmodule Aoc.Y2021.Day08 do
   @digits %{abcdefg: 8, acf: 7, abdefg: 6, abdfg: 5, bcdf: 4, acdfg: 3, acdeg: 2, cf: 1, abcefg: 0, abcdfg: 9}
   @default_segment "abcdefg acf abdefg abdfg bcdf acdfg acdeg cf abcefg abcdfg"
 
-  def run_part1(), do: get_input() |> solve_part1()
-  def run_part2(), do: get_input() |> solve_part2()
-
   def solve_part1(data) do
     data
     |> Enum.map(&(&1 |> Enum.at(1) |> String.split(" ", trim: true)))
@@ -39,7 +36,7 @@ defmodule Aoc.Y2021.Day08 do
   defp get_frequencies(digits), do: Enum.frequencies(String.graphemes(String.replace(digits, " ", "")))
   defp get_fingerprint(map, digit), do: digit |> String.graphemes() |> Enum.map(&Map.get(map, &1, 0)) |> Enum.sum()
 
-  defp get_input(),
+  def get_input(),
     do: get_string_input("2021", "08") |> String.split("\n") |> Enum.map(&String.split(&1, "|", trim: true))
 
   def solved_status(), do: :solved

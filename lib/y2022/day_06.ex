@@ -4,9 +4,6 @@ defmodule Aoc.Y2022.Day06 do
   """
   import Aoc.Helper.IO
 
-  def run_part1(), do: get_input() |> solve_part1()
-  def run_part2(), do: get_input() |> solve_part2()
-
   def solve_part1(data), do: data |> detect(4)
   def solve_part2(data), do: data |> detect(13)
 
@@ -19,7 +16,7 @@ defmodule Aoc.Y2022.Day06 do
       end)
       |> elem(1)
 
-  defp get_input(), do: get_string_input("2022", "06") |> String.to_charlist()
+  def get_input(), do: get_string_input("2022", "06") |> String.to_charlist()
 
   def solved_status(), do: :solved
 end

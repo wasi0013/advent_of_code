@@ -4,9 +4,6 @@ defmodule Aoc.Y2022.Day04 do
   """
   import Aoc.Helper.IO
 
-  def run_part1(), do: get_input() |> solve_part1()
-  def run_part2(), do: get_input() |> solve_part2()
-
   def solve_part1(data), do: data |> Enum.count(&fits?/1)
   def solve_part2(data), do: data |> Enum.count(&overlaps?/1)
 
@@ -16,7 +13,7 @@ defmodule Aoc.Y2022.Day04 do
 
   def overlaps?([x1, y1, x2, y2]), do: Range.disjoint?(x1..y1, x2..y2) == false
 
-  defp get_input(),
+  def get_input(),
     do:
       get_string_input("2022", "04")
       |> String.split(["\n", ",", "-"], trim: true)

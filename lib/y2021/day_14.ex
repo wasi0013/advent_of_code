@@ -4,9 +4,6 @@ defmodule Aoc.Y2021.Day14 do
   """
   import Aoc.Helper.IO
 
-  def run_part1(), do: get_input() |> solve_part1()
-  def run_part2(), do: get_input() |> solve_part2()
-
   def solve_part1({polymar, pairs}), do: step(polymar, count(polymar), pairs, 10)
   def solve_part2({polymar, pairs}), do: step(polymar, count(polymar), pairs, 40)
 
@@ -40,7 +37,7 @@ defmodule Aoc.Y2021.Day14 do
         Map.update(acc, String.graphemes(pair) |> Enum.at(0), count, fn v -> v + count end)
       end)
 
-  defp get_input(), do: get_string_input("2021", "14") |> String.split("\n\n", trim: true) |> parse()
+  def get_input(), do: get_string_input("2021", "14") |> String.split("\n\n", trim: true) |> parse()
 
   defp parse([template, pairs]),
     do: {

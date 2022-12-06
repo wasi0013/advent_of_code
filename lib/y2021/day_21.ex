@@ -6,9 +6,6 @@ defmodule Aoc.Y2021.Day21 do
   use Agent
   defp start, do: Agent.start_link(fn -> %{} end, name: __MODULE__)
 
-  def run_part1(), do: get_input() |> solve_part1()
-  def run_part2(), do: get_input() |> solve_part2()
-
   def solve_part1([_p1, num1, _p2, num2]) do
     play(num1, num2, 1, 100, 1000)
   end
@@ -69,7 +66,7 @@ defmodule Aoc.Y2021.Day21 do
     end
   end
 
-  defp get_input() do
+  def get_input() do
     Regex.scan(~r/-*\d+/, get_string_input("2021", "21"))
     |> List.flatten()
     |> Enum.map(&String.to_integer/1)

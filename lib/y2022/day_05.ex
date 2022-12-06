@@ -4,9 +4,6 @@ defmodule Aoc.Y2022.Day05 do
   """
   import Aoc.Helper.Util
 
-  def run_part1(), do: get_input() |> solve_part1()
-  def run_part2(), do: get_input() |> solve_part2()
-
   def solve_part1([config, moves]), do: simulate(parse_moves(moves), parse_config(config))
   def solve_part2([config, moves]), do: simulate(parse_moves(moves), parse_config(config), :in_order)
 
@@ -61,7 +58,7 @@ defmodule Aoc.Y2022.Day05 do
         {String.to_integer(num), String.to_integer(src), String.to_integer(dest)}
       end)
 
-  defp get_input(),
+  def get_input(),
     do:
       File.read!("priv/resources/2022/day05.txt")
       |> String.split("\n\n")

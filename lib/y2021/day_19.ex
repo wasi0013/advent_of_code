@@ -4,9 +4,6 @@ defmodule Aoc.Y2021.Day19 do
   """
   import Aoc.Helper.IO
 
-  def run_part1(), do: get_input() |> solve_part1()
-  def run_part2(), do: get_input() |> solve_part2()
-
   def solve_part1(scanners), do: scanners |> count()
   def solve_part2(scanners), do: scanners |> find_largest_distance()
 
@@ -57,7 +54,7 @@ defmodule Aoc.Y2021.Day19 do
     end)
   end
 
-  defp get_input() do
+  def get_input() do
     get_string_input("2021", "19")
     |> String.split("\n\n", trim: true)
     |> Enum.map(

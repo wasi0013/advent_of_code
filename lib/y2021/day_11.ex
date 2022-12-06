@@ -4,9 +4,6 @@ defmodule Aoc.Y2021.Day11 do
   """
   import Aoc.Helper.IO
 
-  def run_part1(), do: get_input() |> solve_part1()
-  def run_part2(), do: get_input() |> solve_part2()
-
   def solve_part1(data), do: grid(data) |> simulate(100, 0)
   def solve_part2(data), do: grid(data) |> find_synchronized_flash()
 
@@ -68,11 +65,12 @@ defmodule Aoc.Y2021.Day11 do
 
   defp set_zero(grid) do
     Enum.reduce(grid, grid, fn {{i, j}, _v}, grid ->
-      Map.update(grid, {i, j}, nil, fn value -> if value > 9, do: 0, else: value end)
+      Map.update(grid, {i, j}, nil, &check/1)
     end)
   end
-
-  defp get_input() do
+  def check(value) when value > 9, do: 0
+  def check(value), do: value
+  def get_input() do
     get_string_input("2021", "11")
     |> String.split("\n", trim: true)
     |> Enum.map(&String.graphemes/1)

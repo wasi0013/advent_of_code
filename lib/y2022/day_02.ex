@@ -10,9 +10,6 @@ defmodule Aoc.Y2022.Day02 do
   @draw 2
   @win 3
 
-  def run_part1(), do: get_input() |> solve_part1()
-  def run_part2(), do: get_input() |> solve_part2()
-
   def solve_part1(data),
     do:
       data
@@ -28,7 +25,7 @@ defmodule Aoc.Y2022.Day02 do
       |> Enum.map(&calculate_score/1)
       |> Enum.sum()
 
-  defp get_input(),
+  def get_input(),
     do:
       get_string_input("2022", "02")
       |> String.split("\n", trim: true)

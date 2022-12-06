@@ -5,9 +5,6 @@ defmodule Aoc.Y2021.Day04 do
   import Aoc.Helper.IO
   import Aoc.Helper.Util
 
-  def run_part1(), do: get_input() |> solve_part1({[], 0})
-  def run_part2(), do: get_input() |> solve_part2(%{}, [])
-
   def solve_part1({[num | rest], boards}, {[], _num}) do
     marked_boards = boards |> Enum.map(&mark_board(&1, num))
     winner = {Enum.filter(marked_boards, &check_winner?/1), num}
@@ -61,7 +58,7 @@ defmodule Aoc.Y2021.Day04 do
   defp check_winner?(board), do: winning?(board) or winning?(transpose(board))
   defp winning?(board), do: board |> Enum.map(&winning_row?/1) |> Enum.any?(&(&1 === true))
   defp winning_row?(row), do: row |> Enum.all?(&(&1 === true))
-  defp get_input(), do: get_string_input("2021", "04") |> String.split("\n\n", trim: true) |> parse_input
+  def get_input(), do: get_string_input("2021", "04") |> String.split("\n\n", trim: true) |> parse_input
 
   defp parse_input([inputs | boards]),
     do: {String.split(inputs, ",") |> Enum.map(&String.to_integer/1), Enum.map(boards, &parse_board/1)}

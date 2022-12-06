@@ -4,9 +4,6 @@ defmodule Aoc.Y2021.Day15 do
   """
   import Aoc.Helper.IO
 
-  def run_part1(), do: get_input() |> solve_part1()
-  def run_part2(), do: get_input() |> solve_part2()
-
   def solve_part1(data) do
     find_path([{0, 0, 0}], data, %{}, length(data), length(Enum.at(data, 0)), 1) - Enum.at(Enum.at(data, 0), 0)
   end
@@ -50,7 +47,7 @@ defmodule Aoc.Y2021.Day15 do
     end
   end
 
-  defp get_input() do
+  def get_input() do
     get_string_input("2021", "15")
     |> String.split("\n", trim: true)
     |> Enum.map(&(String.to_charlist(&1) |> Enum.map(fn v -> v - ?0 end)))

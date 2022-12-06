@@ -4,9 +4,6 @@ defmodule Aoc.Y2021.Day02 do
   """
   import Aoc.Helper.IO
 
-  def run_part1(), do: get_input() |> solve_part1()
-  def run_part2(), do: get_input() |> solve_part2()
-
   def solve_part1(data), do: data |> plan_course(0, 0)
   def plan_course([], width, depth), do: width * depth
   def plan_course([["forward", value] | rest], width, depth), do: plan_course(rest, width + value, depth)
@@ -23,7 +20,7 @@ defmodule Aoc.Y2021.Day02 do
   def process_aim([["down", value] | rest], width, depth, aim), do: process_aim(rest, width, depth, aim + value)
   def process_aim([["up", value] | rest], width, depth, aim), do: process_aim(rest, width, depth, aim - value)
 
-  defp get_input(),
+  def get_input(),
     do:
       get_string_input("2021", "02")
       |> String.split("\n")

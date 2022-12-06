@@ -4,10 +4,6 @@ defmodule Aoc.Y2020.Day07 do
   """
   import Aoc.Helper.IO
 
-  def run_part1(), do: get_input() |> solve_part1()
-
-  def run_part2(), do: get_input() |> solve_part2()
-
   def solve_part1(data) do
     cache = Map.new(Enum.map(data, fn {key, _bags} -> {key, nil} end))
     cache = Map.update(cache, "shiny gold", true, fn _ -> true end)
@@ -53,7 +49,7 @@ defmodule Aoc.Y2020.Day07 do
     :unsolved
   end
 
-  defp get_input() do
+  def get_input() do
     get_string_input("2020", "07")
     |> String.split("\n")
     |> Enum.map(&(&1 |> String.split("contain", trim: true)))

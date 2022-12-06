@@ -4,9 +4,6 @@ defmodule Aoc.Y2022.Day03 do
   """
   import Aoc.Helper.IO
 
-  def run_part1(), do: get_input() |> solve_part1()
-  def run_part2(), do: get_input() |> solve_part2()
-
   def solve_part1(data) do
     data
     |> Enum.map(fn str -> String.split_at(str, div(String.length(str), 2)) end)
@@ -35,7 +32,7 @@ defmodule Aoc.Y2022.Day03 do
   defp process([char]) when char > ?Z, do: rem(char, ?a) + 1
   defp process([char]), do: rem(char, ?A) + 27
 
-  defp get_input() do
+  def get_input() do
     get_string_input("2022", "03")
     |> String.split("\n", trim: true)
   end

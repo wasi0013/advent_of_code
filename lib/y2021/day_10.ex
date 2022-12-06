@@ -8,11 +8,8 @@ defmodule Aoc.Y2021.Day10 do
     ")" => 3,
     "]" => 57,
     "}" => 1197,
-    ">" => 25137
+    ">" => 25_137
   }
-
-  def run_part1(), do: get_input() |> solve_part1()
-  def run_part2(), do: get_input() |> solve_part2()
 
   def solve_part1(data), do: data |> Enum.map(&parse/1) |> Enum.filter(&is_integer/1) |> Enum.sum()
 
@@ -44,7 +41,7 @@ defmodule Aoc.Y2021.Day10 do
   defp calc_score(">", score), do: score * 5 + 4
 
   defp median(list), do: Enum.at(Enum.sort(list), div(length(list), 2))
-  defp get_input(), do: get_string_input("2021", "10") |> String.split("\n", trim: true)
+  def get_input(), do: get_string_input("2021", "10") |> String.split("\n", trim: true)
 
   def solved_status(), do: :solved
 end

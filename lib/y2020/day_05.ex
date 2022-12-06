@@ -4,10 +4,6 @@ defmodule Aoc.Y2020.Day05 do
   """
   import Aoc.Helper.IO
 
-  def run_part1(), do: get_input() |> solve_part1()
-
-  def run_part2(), do: get_input() |> solve_part2()
-
   def solve_part1(data), do: data |> Enum.map(&get_seat_id/1) |> Enum.max()
 
   def solve_part2(data) do
@@ -26,7 +22,7 @@ defmodule Aoc.Y2020.Day05 do
   defp search(["L" | rest], list), do: search(rest, Enum.split(list, round(length(list) / 2)) |> elem(0))
   defp search(["R" | rest], list), do: search(rest, Enum.split(list, round(length(list) / 2)) |> elem(1))
 
-  defp get_input(), do: get_string_input("2020", "05") |> String.split("\n") |> Enum.map(&String.graphemes/1)
+  def get_input(), do: get_string_input("2020", "05") |> String.split("\n") |> Enum.map(&String.graphemes/1)
 
   def solved_status(), do: :solved
 end

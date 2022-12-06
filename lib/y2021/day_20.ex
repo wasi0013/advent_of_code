@@ -6,9 +6,6 @@ defmodule Aoc.Y2021.Day20 do
   use Agent
   defp start, do: Agent.start_link(fn -> %{} end, name: __MODULE__)
 
-  def run_part1(), do: get_input() |> solve_part1()
-  def run_part2(), do: get_input() |> solve_part2()
-
   def solve_part1({algo, img}) do
     {:ok, _} = start()
     result = img |> get_light_pixels() |> count(algo, 2)
@@ -48,7 +45,7 @@ defmodule Aoc.Y2021.Day20 do
     |> then(&Enum.at(algo, &1))
   end
 
-  defp get_input() do
+  def get_input() do
     get_string_input("2021", "20")
     |> String.split("\n\n", trim: true)
     |> then(fn [algo, img] ->

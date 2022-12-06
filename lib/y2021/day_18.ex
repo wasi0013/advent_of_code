@@ -4,9 +4,6 @@ defmodule Aoc.Y2021.Day18 do
   """
   import Aoc.Helper.IO
 
-  def run_part1(), do: get_input() |> solve_part1()
-  def run_part2(), do: get_input() |> solve_part2()
-
   def solve_part1(data), do: data |> add |> calc_mag
 
   def solve_part2(data, result \\ -1) do
@@ -95,7 +92,7 @@ defmodule Aoc.Y2021.Day18 do
 
   def flat_list([num | snails], depth, flat_list), do: flat_list(snails, depth, [{depth, num} | flat_list])
 
-  defp get_input() do
+  def get_input() do
     get_string_input("2021", "18")
     |> String.split("\n", trim: true)
     |> Enum.map(&Code.string_to_quoted/1)

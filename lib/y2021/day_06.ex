@@ -4,9 +4,6 @@ defmodule Aoc.Y2021.Day06 do
   """
   import Aoc.Helper.IO
 
-  def run_part1(), do: get_input() |> solve_part1()
-  def run_part2(), do: get_input() |> solve_part2()
-
   def solve_part1(data), do: solve(data, 80)
   def solve_part2(data), do: solve(data, 256)
 
@@ -19,6 +16,6 @@ defmodule Aoc.Y2021.Day06 do
     simulate([first, second, third, fourth, fifth, sixth, seventh + zeroth, eighth, zeroth], days - 1)
   end
 
-  defp get_input(), do: get_integer_input("2021", "06", ",")
+  def get_input(), do: get_integer_input("2021", "06", ",")
   def solved_status(), do: :solved
 end

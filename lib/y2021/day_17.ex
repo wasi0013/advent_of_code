@@ -4,9 +4,6 @@ defmodule Aoc.Y2021.Day17 do
   """
   import Aoc.Helper.IO
 
-  def run_part1(), do: get_input() |> solve_part1()
-  def run_part2(), do: get_input() |> solve_part2()
-
   def solve_part1([_x1, _x2, y1, _y2]), do: div(y1 * (y1 + 1), 2)
   def solve_part2(data), do: data |> count()
 
@@ -24,7 +21,7 @@ defmodule Aoc.Y2021.Day17 do
   defp update(0), do: 0
   defp update(vx), do: vx + ((vx < 0 && 1) || -1)
 
-  defp get_input() do
+  def get_input() do
     Regex.scan(~r/-*\d+/, get_string_input("2021", "17"))
     |> List.flatten()
     |> Enum.map(&String.to_integer/1)

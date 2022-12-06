@@ -3,10 +3,7 @@ defmodule Aoc.Y<%= year %>.Day<%= String.pad_leading(Integer.to_string(day), 2, 
   Solved https://adventofcode.com/<%= year %>/day/<%= day %>
   """
   import Aoc.Helper.IO
-  
-  def run_part1(), do: get_input() |> solve_part1()
-  def run_part2(), do: get_input() |> solve_part2()
-
+   
   def solve_part1(_data) do
     :unsolved
   end
@@ -15,7 +12,7 @@ defmodule Aoc.Y<%= year %>.Day<%= String.pad_leading(Integer.to_string(day), 2, 
     :unsolved
   end
 
-  defp get_input() do
+  def get_input() do
     get_string_input("<%= year %>", "<%=String.pad_leading(Integer.to_string(day), 2, "0") %>")
   end
 

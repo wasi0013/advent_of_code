@@ -4,10 +4,6 @@ defmodule Aoc.Y2020.Day02 do
   """
   import Aoc.Helper.IO
 
-  def run_part1(), do: get_input() |> solve_part1()
-
-  def run_part2(), do: get_input() |> solve_part2()
-
   def solve_part1(data), do: data |> Enum.map(&valid?/1) |> Enum.count(& &1)
 
   def valid?([n1, n2, char, password]),
@@ -28,7 +24,7 @@ defmodule Aoc.Y2020.Day02 do
 
   defp getchar(password, num), do: Enum.at(String.graphemes(password), String.to_integer(num) - 1)
 
-  defp get_input() do
+  def get_input() do
     get_string_input("2020", "02")
     |> String.split("\n")
     |> Enum.map(fn line -> Regex.run(~r/^(.*)-(.*) (.*): (.*)$/, line) |> Enum.take(-4) end)

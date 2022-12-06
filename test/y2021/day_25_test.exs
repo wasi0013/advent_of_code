@@ -5,6 +5,6 @@ defmodule AocTest.Y2021.Day25Test do
 
   @tag :slow
   test "Part 1 is solved" do
-    assert run_part1() == 435
+    assert solve_part1(get_input()) == 435
   end
 end

@@ -4,10 +4,10 @@ defmodule AocTest.Y2022.Day04Test do
   import Aoc.Y2022.Day04
 
   test "Part 1 is solved" do
-    assert run_part1() == 573
+    assert solve_part1(get_input()) == 573
   end
 
   test "Part 2 is solved" do
-    assert run_part2() == 867
+    assert solve_part2(get_input()) == 867
   end
 end

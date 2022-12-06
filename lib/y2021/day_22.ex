@@ -4,9 +4,6 @@ defmodule Aoc.Y2021.Day22 do
   """
   import Aoc.Helper.IO
 
-  def run_part1(), do: get_input() |> solve_part1()
-  def run_part2(), do: get_input() |> solve_part2()
-
   def solve_part1(data), do: data |> Enum.reject(fn {_s, r} -> Enum.min(r) < -50 or Enum.max(r) > 50 end) |> count()
   def solve_part2(data), do: data |> count()
 
@@ -42,7 +39,7 @@ defmodule Aoc.Y2021.Day22 do
     |> count(rest)
   end
 
-  defp get_input() do
+  def get_input() do
     get_string_input("2021", "22")
     |> String.split("\n", trim: true)
     |> Enum.map(fn

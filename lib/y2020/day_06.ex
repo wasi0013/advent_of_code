@@ -4,10 +4,6 @@ defmodule Aoc.Y2020.Day06 do
   """
   import Aoc.Helper.IO
 
-  def run_part1(), do: get_input() |> solve_part1()
-
-  def run_part2(), do: get_input() |> solve_part2()
-
   def solve_part1(data) do
     data
     |> Enum.map(&String.replace(&1, "\n", ""))
@@ -24,7 +20,7 @@ defmodule Aoc.Y2020.Day06 do
     |> Enum.sum()
   end
 
-  defp get_input(), do: get_string_input("2020", "06") |> String.split("\n\n")
+  def get_input(), do: get_string_input("2020", "06") |> String.split("\n\n")
 
   def solved_status(), do: :solved
 end

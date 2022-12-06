@@ -4,9 +4,6 @@ defmodule Aoc.Y2021.Day09 do
   """
   import Aoc.Helper.IO
 
-  def run_part1(), do: get_input() |> solve_part1()
-  def run_part2(), do: get_input() |> solve_part2()
-
   def solve_part1(data), do: data |> get_risk_levels() |> Enum.sum()
 
   def solve_part2(data) do
@@ -53,7 +50,7 @@ defmodule Aoc.Y2021.Day09 do
     end
   end
 
-  defp get_input() do
+  def get_input() do
     get_string_input("2021", "09")
     |> String.split("\n")
     |> Enum.map(&(&1 |> String.graphemes() |> Enum.map(fn v -> String.to_integer(v) end)))

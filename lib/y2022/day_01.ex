@@ -4,9 +4,6 @@ defmodule Aoc.Y2022.Day01 do
   """
   import Aoc.Helper.IO
 
-  def run_part1(), do: get_input() |> solve_part1()
-  def run_part2(), do: get_input() |> solve_part2()
-
   def solve_part1(data) do
     data
     |> Enum.map(&Enum.sum/1)
@@ -21,7 +18,7 @@ defmodule Aoc.Y2022.Day01 do
     |> Enum.sum()
   end
 
-  defp get_input() do
+  def get_input() do
     get_string_input("2022", "01")
     |> String.split("\n\n")
     |> Enum.map(fn string -> string |> String.split("\n") |> Enum.map(&String.to_integer/1) end)

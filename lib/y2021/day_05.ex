@@ -5,9 +5,6 @@ defmodule Aoc.Y2021.Day05 do
   import Aoc.Helper.IO
   import Aoc.Helper.Util
 
-  def run_part1(), do: get_input() |> solve_part1()
-  def run_part2(), do: get_input() |> solve_part2()
-
   def solve_part1(data), do: data |> Enum.filter(fn [a, b, x, y] -> a == x or b == y end) |> count_overlaps()
   def solve_part2(data), do: data |> count_overlaps()
 
@@ -51,7 +48,7 @@ defmodule Aoc.Y2021.Day05 do
       transpose(data)
       |> then(fn [x1, y1, x2, y2] -> {Enum.max(List.flatten([x1, x2])), Enum.max(List.flatten([y1, y2]))} end)
 
-  defp get_input() do
+  def get_input() do
     get_string_input("2021", "05")
     |> String.split(["\n", " -> ", ",", " "], trim: true)
     |> Enum.map(&String.to_integer/1)

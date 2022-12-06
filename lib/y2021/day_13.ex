@@ -5,9 +5,6 @@ defmodule Aoc.Y2021.Day13 do
   import Aoc.Helper.IO
   import Enum
 
-  def run_part1(), do: get_input() |> solve_part1()
-  def run_part2(), do: get_input() |> solve_part2()
-
   def solve_part1([points, ins]), do: fold(make_grid(points), at(ins, 0)) |> List.flatten() |> count(& &1)
   def solve_part2([points, ins]), do: reduce(ins, make_grid(points), fn ins, acc -> fold(acc, ins) end) |> print()
 
@@ -29,7 +26,7 @@ defmodule Aoc.Y2021.Day13 do
     |> map(fn {x, y} -> map(zip(x, y), fn {a, b} -> a or b end) end)
   end
 
-  defp get_input(), do: get_string_input("2021", "13") |> parse()
+  def get_input(), do: get_string_input("2021", "13") |> parse()
 
   defp parse(data) do
     data

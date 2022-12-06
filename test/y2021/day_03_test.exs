@@ -3,13 +3,6 @@ defmodule AocTest.Y2021.Day03Test do
   use ExUnit.Case, async: true
   import Aoc.Y2021.Day03
 
-  @example_transposed [
-    ["0", "1", "1", "1", "1", "0", "0", "1", "1", "1", "0", "0"],
-    ["0", "1", "0", "0", "0", "1", "0", "1", "0", "1", "0", "1"],
-    ["1", "1", "1", "1", "1", "1", "1", "1", "0", "0", "0", "0"],
-    ["0", "1", "1", "1", "0", "1", "1", "0", "0", "0", "1", "1"],
-    ["0", "0", "0", "1", "1", "1", "1", "0", "0", "1", "0", "0"]
-  ]
   @example [
     ["0", "0", "1", "0", "0"],
     ["1", "1", "1", "1", "0"],
@@ -25,7 +18,7 @@ defmodule AocTest.Y2021.Day03Test do
     ["0", "1", "0", "1", "0"]
   ]
   test "Part 1 Example" do
-    assert solve_part1(@example_transposed) == 198
+    assert solve_part1(@example) == 198
   end
 
   test "Part 2 Example" do
@@ -33,11 +26,11 @@ defmodule AocTest.Y2021.Day03Test do
   end
 
   test "Part 1 is solved" do
-    assert run_part1() == 2_648_450
+    assert solve_part1(get_input()) == 2_648_450
   end
 
   @tag :slow
   test "Part 2 is solved" do
-    assert run_part2() == 2_845_944
+    assert solve_part2(get_input()) == 2_845_944
   end
 end

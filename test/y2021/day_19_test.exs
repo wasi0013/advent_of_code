@@ -5,11 +5,11 @@ defmodule AocTest.Y2021.Day19Test do
 
   @tag :slow
   test "Part 1 is solved" do
-    assert run_part1() == 467
+    assert solve_part1(get_input()) == 467
   end
 
   @tag :slow
   test "Part 2 is solved" do
-    assert run_part2() == 12_226
+    assert solve_part2(get_input()) == 12_226
   end
 end

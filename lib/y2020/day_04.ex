@@ -6,10 +6,6 @@ defmodule Aoc.Y2020.Day04 do
   @fields ~w[byr iyr eyr hgt hcl ecl pid]
   @range %{"in" => 59..76, "cm" => 150..193, "byr" => 1920..2002, "eyr" => 2020..2030, "iyr" => 2010..2020}
 
-  def run_part1(), do: get_input() |> solve_part1()
-
-  def run_part2(), do: get_input() |> solve_part2()
-
   def solve_part1(data) do
     data
     |> Enum.map(fn list -> MapSet.new(Enum.map(list, fn item -> String.split(item, ":") |> Enum.at(0) end)) end)
@@ -46,7 +42,7 @@ defmodule Aoc.Y2020.Day04 do
     end
   end
 
-  defp get_input() do
+  def get_input() do
     get_string_input("2020", "04")
     |> String.split("\n\n")
     |> Enum.map(&String.split(&1, [" ", "\n"]))

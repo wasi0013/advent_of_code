@@ -4,9 +4,6 @@ defmodule Aoc.Y2021.Day16 do
   """
   import Aoc.Helper.IO
 
-  def run_part1(), do: get_input() |> solve_part1()
-  def run_part2(), do: get_input() |> solve_part2()
-
   def solve_part1(data), do: data |> hex_to_bin() |> parse() |> version_sum()
   def solve_part2(data), do: data |> hex_to_bin() |> parse() |> eval()
 
@@ -132,7 +129,7 @@ defmodule Aoc.Y2021.Day16 do
       |> Enum.reverse()
       |> List.flatten()
 
-  defp get_input() do
+  def get_input() do
     get_string_input("2021", "16")
   end
 
