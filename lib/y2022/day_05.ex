@@ -46,7 +46,7 @@ defmodule Aoc.Y2022.Day05 do
       |> String.split("\n")
       |> Enum.map(&String.graphemes/1)
       |> transpose()
-      |> Enum.map(fn col -> Enum.reject(col, &(&1 in [" ", "[", "]"] )) end)
+      |> Enum.map(fn col -> Enum.reject(col, &(&1 in [" ", "[", "]"])) end)
       |> Enum.reject(&(&1 == []))
       |> Enum.zip([1, 2, 3, 4, 5, 6, 7, 8, 9])
       |> Enum.map(fn {value, key} -> {key, value} end)
