@@ -68,8 +68,10 @@ defmodule Aoc.Y2021.Day11 do
       Map.update(grid, {i, j}, nil, &check/1)
     end)
   end
+
   def check(value) when value > 9, do: 0
   def check(value), do: value
+
   def get_input() do
     get_string_input("2021", "11")
     |> String.split("\n", trim: true)
