@@ -26,6 +26,15 @@ run `mix test`
   </tr>
   
   <tr>
+   <td><a href="https://adventofcode.com/2022/day/8">2022</a></td>
+   <td><a href='https://github.com/wasi0013/advent_of_code/blob/master/lib/y2022/day_08.ex'> 8</a></td>
+   <td> :green_circle: :green_circle: </td>
+   
+   
+   
+   </tr>
+
+  <tr>
    <td><a href="https://adventofcode.com/2022/day/7">2022</a></td>
    <td><a href='https://github.com/wasi0013/advent_of_code/blob/master/lib/y2022/day_07.ex'> 7</a></td>
    <td> :green_circle: :green_circle: </td>
