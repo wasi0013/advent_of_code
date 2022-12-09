@@ -61,25 +61,25 @@ defmodule Aoc.Y2022.Day08 do
     )
   end
 
-  def checker([], [], _, result), do: Enum.reverse(result)
+  def checker([], [], _, new_states), do: Enum.reverse(new_states)
 
-  def checker([_tree | trees], [true | states], [_max | max_heights], result),
-    do: checker(trees, states, max_heights, [true | result])
+  def checker([_tree | trees], [true | states], [_max | max_heights], new_states),
+    do: checker(trees, states, max_heights, [true | new_states])
 
-  def checker([tree | trees], [false | states], [max | max_heights], result) when max < tree,
-    do: checker(trees, states, max_heights, [true | result])
+  def checker([tree | trees], [false | states], [max | max_heights], new_states) when max < tree,
+    do: checker(trees, states, max_heights, [true | new_states])
 
-  def checker([_tree | trees], [false | states], [_max | max_heights], result),
-    do: checker(trees, states, max_heights, [false | result])
+  def checker([_tree | trees], [false | states], [_max | max_heights], new_states),
+    do: checker(trees, states, max_heights, [false | new_states])
 
   def calc_score(trees, scores) do
     calc_score(trees, scores, [])
   end
 
-  def calc_score([], [], result), do: Enum.reverse(result)
+  def calc_score([], [], new_scores), do: Enum.reverse(new_scores)
 
-  def calc_score([tree | trees], [score | scores], result) do
-    calc_score(trees, scores, [score * get_score(trees, tree) | result])
+  def calc_score([tree | trees], [score | scores], new_scores) do
+    calc_score(trees, scores, [score * get_score(trees, tree) | new_scores])
   end
 
   def get_score(trees, tree),
