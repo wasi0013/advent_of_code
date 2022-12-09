@@ -29,24 +29,17 @@ defmodule Aoc.Y2022.Day08 do
 
   def set_score(data, states), do: [data, Enum.zip_with(data, states, &calc_score/2)]
 
-  def init_state(data, part2 \\ false),
-    do:
-      for(
-        i <- 0..(length(data) - 1),
-        do:
-          for(
-            j <- 0..(length(Enum.at(data, 0)) - 1),
-            do:
-              if(not part2,
-                do:
-                  if(i == 0 or i == length(data) - 1 or j == 0 or j == length(Enum.at(data, 0)) - 1,
-                    do: true,
-                    else: false
-                  ),
-                else: 1
-              )
-          )
-      )
+  def init_state(data, part2 \\ false) do
+    for i <- 0..(length(data) - 1) do
+      for j <- 0..(length(Enum.at(data, 0)) - 1) do
+        if not part2 do
+          if(i in [0, length(data) - 1] or j in [0, length(Enum.at(data, 0)) - 1], do: true, else: false)
+        else
+          1
+        end
+      end
+    end
+  end
 
   def checker(trees, states) do
     checker(
