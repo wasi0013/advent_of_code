@@ -21,13 +21,13 @@ defmodule Aoc.Y2022.Day08 do
 
   def solve_part2(data) do
     [data, init_state(data, true)]
-    |> then(fn [data, states] -> set_score(data, states) end)
+    |> then(fn [data, scores] -> set_score(data, scores) end)
     |> Enum.map(&rotate90/1)
-    |> then(fn [data, states] -> set_score(data, states) end)
+    |> then(fn [data, scores] -> set_score(data, scores) end)
     |> Enum.map(&rotate90/1)
-    |> then(fn [data, states] -> set_score(data, states) end)
+    |> then(fn [data, scores] -> set_score(data, scores) end)
     |> Enum.map(&rotate90/1)
-    |> then(fn [data, states] -> set_score(data, states) end)
+    |> then(fn [data, scores] -> set_score(data, scores) end)
     |> Enum.at(1)
     |> List.flatten()
     |> Enum.max()
