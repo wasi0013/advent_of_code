@@ -2,19 +2,23 @@
 
 [![Elixir CI](https://github.com/wasi0013/advent_of_code/actions/workflows/elixir.yml/badge.svg?branch=master)](https://github.com/wasi0013/advent_of_code/actions/workflows/elixir.yml)
 
-All of my Advent of Code solutions written in Elixir.
+Advent of Code Elixir Solutions.
 
-## Generate New Solve
+## Start
 
-The following mix task generates boilerplates for new solve. 
+Run the following command and get started for a new day: 
 
     mix code_new -y <year> -d <day(1-25)>
 
-Check this [repository](https://github.com/code-shoily/advent_of_code) for better implementation of a similar mix task (Contains Clean Code + Input Download feature)
-
 ## Test
 
-run `mix test`
+Run a single test:
+
+    mix test test/y<year>/day_<day(01-25)>_test.exs --trace --include slow
+
+Run all tests:
+
+    mix test --include slow`
 
 ## Solved so far
 
