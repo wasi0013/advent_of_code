@@ -6,28 +6,18 @@ defmodule Aoc.Y2022.Day08 do
   import Aoc.Helper.Util
 
   def solve_part1(data) do
-    [data, init_state(data)]
-    |> then(fn [data, states] -> set_visibility(data, states) end)
-    |> Enum.map(&rotate90/1)
-    |> then(fn [data, states] -> set_visibility(data, states) end)
-    |> Enum.map(&rotate90/1)
-    |> then(fn [data, states] -> set_visibility(data, states) end)
-    |> Enum.map(&rotate90/1)
-    |> then(fn [data, states] -> set_visibility(data, states) end)
+    Enum.reduce(1..4, [data, init_state(data)], fn _i, [data, states] ->
+      set_visibility(data, states) |> Enum.map(&rotate90/1)
+    end)
     |> Enum.at(1)
     |> List.flatten()
     |> Enum.count(& &1)
   end
 
   def solve_part2(data) do
-    [data, init_state(data, true)]
-    |> then(fn [data, scores] -> set_score(data, scores) end)
-    |> Enum.map(&rotate90/1)
-    |> then(fn [data, scores] -> set_score(data, scores) end)
-    |> Enum.map(&rotate90/1)
-    |> then(fn [data, scores] -> set_score(data, scores) end)
-    |> Enum.map(&rotate90/1)
-    |> then(fn [data, scores] -> set_score(data, scores) end)
+    Enum.reduce(1..4, [data, init_state(data, true)], fn _i, [data, scores] ->
+      set_score(data, scores) |> Enum.map(&rotate90/1)
+    end)
     |> Enum.at(1)
     |> List.flatten()
     |> Enum.max()
