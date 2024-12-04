@@ -13,15 +13,12 @@ defmodule Aoc.Y2024.Day04 do
   ]
 
   def solve_part1(data) do
-    diag_count([data, 0])
-    |> rotate_count()
-    |> diag_count()
-    |> rotate_count()
-    |> diag_count()
-    |> rotate_count()
-    |> diag_count()
-    |> rotate_count()
-    |> then(fn [_, xmas_count] -> xmas_count end)
+    Enum.reduce(1..4, {data, 0}, fn _, acc ->
+      acc
+      |> diag_count()
+      |> rotate_count()
+    end)
+    |> elem(1)
   end
 
   def solve_part2(data),
@@ -33,14 +30,14 @@ defmodule Aoc.Y2024.Day04 do
       |> Enum.count(fn [m, {x, y}] -> xmas?(m, {x, y}) end)
 
   def str_to_grid(str), do: str |> String.split("\n") |> Enum.map(&String.to_charlist/1)
-  def grid_to_str(mat), do: mat |> Enum.map(fn f -> "#{f}" end) |> Enum.join("\n")
+  def grid_to_str(grid), do: Enum.map_join(grid, "\n", &List.to_string/1)
 
-  def rotate_count([data, prev]),
-    do: data |> str_to_grid() |> rotate90() |> grid_to_str() |> then(fn data -> [data, prev + count_xmas(data)] end)
+  def rotate_count({data, prev}),
+    do: data |> str_to_grid() |> rotate90() |> grid_to_str() |> then(fn data -> {data, prev + count_xmas(data)} end)
 
   def count_xmas(str), do: Regex.scan(~r/XMAS/, str) |> Enum.count()
 
-  def diag_count([grid, prev]),
+  def diag_count({grid, prev}),
     do:
       grid
       |> str_to_grid()
@@ -53,7 +50,7 @@ defmodule Aoc.Y2024.Day04 do
         end)
       end)
       |> Enum.map(fn {_, values} -> values end)
-      |> then(fn v -> [grid, prev + count_xmas(grid_to_str(v))] end)
+      |> then(fn v -> {grid, prev + count_xmas(grid_to_str(v))} end)
 
   def map_coordinates(grid),
     do:
