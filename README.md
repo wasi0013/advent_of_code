@@ -30,6 +30,15 @@ Run all tests:
   </tr>
   
   <tr>
+   <td><a href="https://adventofcode.com/2024/day/4">2024</a></td>
+   <td><a href='https://github.com/wasi0013/advent_of_code/blob/master/lib/y2024/day_04.ex'> 4</a></td>
+   <td> :green_circle: :green_circle: </td>
+   
+   
+   
+   </tr>
+
+  <tr>
    <td><a href="https://adventofcode.com/2024/day/3">2024</a></td>
    <td><a href='https://github.com/wasi0013/advent_of_code/blob/master/lib/y2024/day_03.ex'> 3</a></td>
    <td> :green_circle: :green_circle: </td>
