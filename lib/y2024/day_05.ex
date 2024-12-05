@@ -64,9 +64,7 @@ defmodule Aoc.Y2024.Day05 do
   def is_valid?(list, order) do
     Enum.reduce_while(list, {[], true}, fn num, {visited, is_valid} ->
       if Map.has_key?(order, num) do
-        restricted = Map.get(order, num, [])
-
-        if Enum.any?(restricted, &(&1 in visited)) do
+        if Enum.any?(Map.get(order, num, []), &(&1 in visited)) do
           {:halt, {visited, false}}
         else
           {:cont, {[num | visited], is_valid}}
