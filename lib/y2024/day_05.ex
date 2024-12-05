@@ -22,7 +22,7 @@ defmodule Aoc.Y2024.Day05 do
   def process([], order, ins), do: {ins, order}
 
   def process([[key, value] | data], order, ins),
-    do: process(data, Map.update(order, key, [value], fn existing -> Enum.sort([value | existing]) end), ins)
+    do: process(data, Map.update(order, key, [value], fn existing -> [value | existing] end), ins)
 
   def process([a | data], order, ins), do: process(data, order, [a | ins])
 
