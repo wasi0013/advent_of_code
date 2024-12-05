@@ -48,8 +48,7 @@ defmodule Aoc.Y2024.Day05 do
   def find_invalid_pair(list, order) do
     Enum.reduce_while(list, [], fn num, visited ->
       if Map.has_key?(order, num) do
-        invalid_nums = Map.get(order, num, [])
-        invalids = Enum.filter(invalid_nums, &(&1 in visited))
+        invalids = Map.get(order, num, []) |> Enum.filter(&(&1 in visited))
 
         if invalids != [] do
           {:halt, List.first(invalids) |> then(fn x -> {x, num} end)}
